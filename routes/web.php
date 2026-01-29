@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\PromoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('program/{id}/edit', [ProgramController::class, 'edit'])->name('program.edit');
         Route::put('program/{id}', [ProgramController::class, 'update'])->name('program.update');
         Route::delete('program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
+
+        // RUTE PROMO & EVENT
+        Route::get('promo', [PromoController::class, 'index'])->name('promo.index');
+        Route::get('promo/create', [PromoController::class, 'create'])->name('promo.create');
+        Route::post('promo', [PromoController::class, 'store'])->name('promo.store');
+        Route::get('promo/{id}/edit', [PromoController::class, 'edit'])->name('promo.edit');
+        Route::put('promo/{id}', [PromoController::class, 'update'])->name('promo.update');
+        Route::delete('promo/{id}', [PromoController::class, 'destroy'])->name('promo.destroy');
+
         /* --- Halaman Statis Admin --- */
         Route::view('fasilitas', 'admin.fasilitas')->name('fasilitas');
-        Route::view('promo', 'admin.promo')->name('promo');
+        
     });
 });
 

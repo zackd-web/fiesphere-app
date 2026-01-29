@@ -48,72 +48,43 @@
 
     <!-- NEW & IMPROVED: Poster Section (Horizontal Slider) -->
     <section id="announcement" class="py-24 bg-white overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl font-extrabold text-fiesphere-blue mb-4">Promo & Event Mendatang</h2>
-                    <p class="text-slate-500">Gulir ke samping untuk melihat berbagai penawaran menarik kami. Klik untuk memperbesar.</p>
-                </div>
-                <!-- Tombol Navigasi Desktop -->
-                <div class="hidden md:flex gap-3">
-                    <button id="posterPrev" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                        <i data-lucide="chevron-left"></i>
-                    </button>
-                    <button id="posterNext" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                        <i data-lucide="chevron-right"></i>
-                    </button>
-                </div>
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="max-w-xl">
+                <h2 class="text-4xl font-extrabold text-fiesphere-blue mb-4">Promo & Event Mendatang</h2>
+                <p class="text-slate-500">Gulir ke samping untuk melihat berbagai penawaran menarik kami. Klik untuk memperbesar.</p>
             </div>
             
-            <!-- Slider Container -->
-            <div id="posterSlider" class="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory scrollbar-hide scroll-smooth">
-                <!-- Poster 1 -->
-                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[35%] snap-center">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-[40px] shadow-xl border-4 border-fiesphere-blue" onclick="openPoster(this)">
-                        <div class="bg-slate-100 aspect-[4/5] relative">
-                            <img src="1.png" class="absolute inset-0 w-full h-full object-cover">
-                            <!-- Overlay Hover -->
-                            <div class="absolute inset-0 bg-fiesphere-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <i data-lucide="maximize-2" class="text-white w-10 h-10"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Poster 2 (Contoh Duplikasi) -->
-                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[35%] snap-center">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-[40px] shadow-xl border-4 border-fiesphere-blue" onclick="openPoster(this)">
-                        <div class="bg-slate-100 aspect-[4/5] relative">
-                            <img src="2.png" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-fiesphere-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <i data-lucide="maximize-2" class="text-white w-10 h-10"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[35%] snap-center">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-[40px] shadow-xl border-4 border-fiesphere-blue" onclick="openPoster(this)">
-                        <div class="bg-slate-100 aspect-[4/5] relative">
-                            <img src="2.png" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-fiesphere-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <i data-lucide="maximize-2" class="text-white w-10 h-10"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Poster 3 (Contoh Duplikasi) -->
-                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[35%] snap-center">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-[40px] shadow-xl border-4 border-fiesphere-blue" onclick="openPoster(this)">
-                        <div class="bg-slate-100 aspect-[4/5] relative">
-                            <img src="6.png" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-fiesphere-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <i data-lucide="maximize-2" class="text-white w-10 h-10"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="hidden md:flex gap-3">
+                <button id="posterPrev" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button id="posterNext" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
+                    <i data-lucide="chevron-right"></i>
+                </button>
             </div>
         </div>
-    </section>
+        
+        <div id="posterSlider" class="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory scrollbar-hide scroll-smooth">
+            @forelse($promos as $promo)
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[35%] snap-center">
+                    <div class="relative group cursor-pointer overflow-hidden rounded-[40px] shadow-xl border-4 border-fiesphere-blue" onclick="openPoster(this)">
+                        <div class="bg-slate-100 aspect-[4/5] relative">
+                            {{-- Panggil gambar dari storage Laravel --}}
+                            <img src="{{ asset('storage/' . $promo->image_path) }}" class="absolute inset-0 w-full h-full object-cover" alt="{{ $promo->title }}">
+                            
+                            <div class="absolute inset-0 bg-fiesphere-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <i data-lucide="maximize-2" class="text-white w-10 h-10"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                {{-- Tampilan kalau admin belum upload promo sama sekali --}}
+                <div class="w-full py-20 text-center border-2 border-dashed border-slate-200 rounded-[40px]">
+                    <p class="text-slate-400 italic">Belum ada promo atau event aktif saat ini.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>

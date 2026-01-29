@@ -32,7 +32,7 @@
                         {{ __('Program') }}
                     </flux:sidebar.item>
 
-                    <flux:sidebar.item icon="ticket" :href="route('admin.promo')" :current="request()->routeIs('admin.promo')" wire:navigate>
+                    <flux:sidebar.item icon="ticket" :href="route('admin.promo.index')" :current="request()->routeIs('admin.promo.index')" wire:navigate>
                         {{ __('Promo & Event') }}
                     </flux:sidebar.item>
 
