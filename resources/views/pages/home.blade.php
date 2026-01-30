@@ -14,6 +14,7 @@
         @include('pages.partials.pricing')
         @include('pages.partials.register')
     </main>
+    @include('pages.partials.contact')
 
     @include('pages.partials.footer')
 

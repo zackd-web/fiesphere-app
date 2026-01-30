@@ -16,18 +16,34 @@
                     </a>
                 </div>
 
-                <div class="flex items-center gap-4 text-sm font-medium text-blue-200 justify-center">
-                    <div class="flex gap-4">
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="Instagram">
-                            <i data-lucide="instagram"></i>
-                        </a>
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="TikTok">
-                            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current"><path d="M12.525.02c1.31-.036 2.612.012 3.914-.03.116 1.133.515 2.22 1.253 3.107a6.666 6.666 0 0 0 3.328 2.21v4.067c-1.637-.11-3.23-.746-4.522-1.78a10.45 10.45 0 0 1-.225 3.33 6.66 6.66 0 0 1-5.69 5.345 6.685 6.685 0 0 1-7.465-5.38 6.67 6.67 0 0 1 4.545-7.79c.174-.054.354-.085.535-.116l-.004 4.148a2.53 2.53 0 0 0-2.093 2.76 2.522 2.522 0 0 0 2.458 2.296 2.522 2.522 0 0 0 2.525-2.525V0h4z"/></svg>
-                        </a>
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="Facebook">
-                            <i data-lucide="facebook"></i>
-                        </a>
-                    </div>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/fiesphere.english?igsh=OG1wNTZlc2I2N3F2&utm_source=qr" 
+                    target="_blank" 
+                    class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" 
+                    title="Instagram">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@fiesphere.english?_t=ZS-8zLK1LGdHcd&_r=1" 
+                    target="_blank" 
+                    class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" 
+                    title="TikTok">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                    </a>
+
+                    <a href="https://wa.me/6285292409545" 
+                    target="_blank" 
+                    class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" 
+                    title="WhatsApp">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+
+                    <a href="https://maps.app.goo.gl/TBRCzPGAXJxzpPfw7?g_st=ipc" 
+                    target="_blank" 
+                    class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" 
+                    title="Google Maps">
+                        <i class="fas fa-map-location-dot text-2xl"></i>
+                    </a>
                 </div>
             </div>
         </div>

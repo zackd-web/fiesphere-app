@@ -1,101 +1,186 @@
-<!-- Registration Form Section (NEW) -->
-    <section id="register" class="py-24">
-        <div class="container mx-auto px-6">
-            <div class="max-w-5xl mx-auto bg-fiesphere-blue rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row">
-                <div class="p-12 md:w-1/2 text-white space-y-8 bg-pattern">
-                    <h2 class="text-4xl font-bold">Gabung Sekarang!</h2>
-                    <p class="text-blue-100">Dapatkan pengalaman belajar yang fleksibel dan terarah. Bisa daftar kelas <b>Online</b> dari mana saja atau <b>Offline</b> di lokasi kami.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-fiesphere-yellow"></i> Konsultasi Level Gratis</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-fiesphere-yellow"></i> Sertifikat Resmi</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-fiesphere-yellow"></i> Akses LMS 24/7</li>
-                    </ul>
-                </div>
-                <div class="p-12 md:w-1/2 bg-white">
-                    @if(session('success'))
-                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <form action="{{ route('pendaftaran.store') }}" method="POST" class="space-y-4">
-                        @csrf
-                        <div>
-                            <label class="block text-sm font-bold text-fiesphere-blue mb-1">Nama Lengkap</label>
-                            <input type="text" name="name" placeholder="Contoh: Budi Santoso" value="{{ old('name') }}" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-fiesphere-blue outline-none" required>
-                            @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-fiesphere-blue mb-1">No. WhatsApp</label>
-                            <input type="tel" name="whatsapp" placeholder="0812xxxxxx" value="{{ old('whatsapp') }}" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-fiesphere-blue outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-fiesphere-blue mb-1">Pilih Metode</label>
-                            <select name="method" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none">
-                                <option value="Online">Online Class (Zoom/Meet)</option>
-                                <option value="Offline">Offline Class (Tatap Muka)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-fiesphere-blue mb-1">Program</label>
-                            <select name="program" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none">
-                                <option value="Speaking Class">Speaking Class</option>
-                                <option value="IELTS/TOEFL Prep">IELTS/TOEFL Prep</option>
-                                <option value="Business English">Business English</option>
-                                <option value="Kids/Junior Program">Kids/Junior Program</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full py-4 bg-fiesphere-yellow text-fiesphere-blue font-bold rounded-xl hover:scale-[1.02] transition-transform shadow-lg">Kirim Pendaftaran</button>
-                    </form>
-                </div>
+<section id="register" class="py-24 bg-slate-50">
+    {{-- MODAL BERHASIL (Success Modal) --}}
+    @if(session('success'))
+    <div id="successModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-fiesphere-blue/60 backdrop-blur-sm transition-all">
+        <div class="bg-white rounded-[40px] max-w-md w-full p-10 text-center shadow-2xl border-4 border-fiesphere-yellow transform animate-in fade-in zoom-in duration-300">
+            <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-green-100">
+                <i data-lucide="check-circle" class="text-green-500 w-14 h-14"></i>
             </div>
-        </div>
-    </section>
+            
+            <h3 class="text-3xl font-black text-fiesphere-blue mb-3">Terima Kasih!</h3>
+            <p class="text-slate-600 leading-relaxed mb-8">
+                {{ session('success') }}
+            </p>
 
-    <!-- Contact & Map Section (NEW) -->
-    <section class="py-24">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <h2 class="text-4xl font-bold text-fiesphere-blue">Kunjungi Kami</h2>
-                    <p class="text-slate-500 leading-relaxed text-lg">
-                        Ingin mendaftar secara <b>Offline</b>? Datang langsung ke kantor kami. Tim kami siap menyambutmu dengan kopi hangat dan konsultasi pendidikan gratis.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-fiesphere-blue text-fiesphere-yellow rounded-xl flex items-center justify-center shrink-0">
-                                <i data-lucide="map-pin"></i>
-                            </div>
-                            <p class="font-semibold">Jl. Sudimoro, Sukoharjo, Gribig, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333</p>
+            <button onclick="closeSuccessModal()" class="w-full py-4 bg-fiesphere-yellow text-fiesphere-blue font-black rounded-2xl hover:bg-[#f0c400] transition-all shadow-lg shadow-fiesphere-yellow/20 uppercase tracking-widest text-sm">
+                Sip, Mengerti
+            </button>
+        </div>
+    </div>
+    <script>
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        // Kunci scroll saat modal muncul
+        document.body.style.overflow = 'hidden';
+    </script>
+    @endif
+
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto bg-fiesphere-blue rounded-[40px] overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+            
+            {{-- Sidebar Info (Kiri) --}}
+            <div class="p-12 lg:w-1/3 text-white space-y-8 bg-pattern flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-blue-400/20">
+                <div class="space-y-4">
+                    <h2 class="text-4xl font-bold leading-tight">Mulai Perjalananmu di <span class="text-fiesphere-yellow">FSEC</span></h2>
+                    <p class="text-blue-100 leading-relaxed">Dapatkan pengalaman belajar yang fleksibel dan terarah. Bergabunglah dengan ratusan siswa lainnya.</p>
+                </div>
+                
+                <ul class="space-y-5">
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-fiesphere-yellow/20 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="text-fiesphere-yellow w-5 h-5"></i>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-green-500 text-white rounded-xl flex items-center justify-center shrink-0">
-                                <i data-lucide="phone"></i>
-                            </div>
-                            <p class="font-semibold">+628-5292-4095-45 (Admin WhatsApp)</p>
+                        <span class="font-medium">Konsultasi Level Gratis</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-fiesphere-yellow/20 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="text-fiesphere-yellow w-5 h-5"></i>
+                        </div>
+                        <span class="font-medium">Sertifikat Resmi</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-fiesphere-yellow/20 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="text-fiesphere-yellow w-5 h-5"></i>
+                        </div>
+                        <span class="font-medium">Akses LMS 24/7</span>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Form Section (Kanan) --}}
+            <div class="p-8 md:p-12 lg:w-2/3 bg-white">
+                {{-- Bagian Error tetap di sini agar user tahu apa yang salah sebelum kirim --}}
+                @if ($errors->any())
+                    <div class="p-4 mb-6 text-sm text-red-800 rounded-2xl bg-red-50 border border-red-100" role="alert">
+                        <p class="font-bold mb-2 text-lg">⚠️ Pendaftaran Belum Lengkap:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('fsec.register.store') }}" method="POST" class="space-y-6">
+                    @csrf
+                    
+                    {{-- Baris 1: Email & Nama --}}
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email Aktif</label>
+                            <input type="email" name="email" placeholder="nama@email.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-fiesphere-blue/10 focus:border-fiesphere-blue outline-none transition-all" required>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Nama Lengkap</label>
+                            <input type="text" name="name" placeholder="Ananda Zaka Al-Izza" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-fiesphere-blue/10 focus:border-fiesphere-blue outline-none transition-all" required>
                         </div>
                     </div>
-                    <!-- Sosmed Grid -->
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/fiesphere.english?igsh=OG1wNTZlc2I2N3F2&utm_source=qr" target="_blank" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="Instagram">
-                            <i class="fab fa-instagram text-2xl"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/@fiesphere.english?_t=ZS-8zLK1LGdHcd&_r=1" target="_blank" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="TikTok">
-                             <i class="fab fa-tiktok text-2xl"></i>
-                        </a>
-                        <a href="https://wa.me/6285292409545"  target="_blank" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="WhatsApp">
-                            <i class="fab fa-whatsapp text-2xl"></i>
-                        </a>
-                        <a href="https://maps.app.goo.gl/TBRCzPGAXJxzpPfw7?g_st=ipc"  target="_blank" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="WhatsApp">
-                            <i class="fas fa-map-location-dot text-2xl"></i>
-                        </a>
+
+                    {{-- Baris 2: Nickname & WhatsApp --}}
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Nama Panggilan</label>
+                            <input type="text" name="nickname" placeholder="Zaka" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all" required>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">WhatsApp</label>
+                            <input type="tel" name="whatsapp" placeholder="08123456789" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all" required>
+                        </div>
                     </div>
-                </div>
-                <!-- Google Maps Slot -->
-                <div class="h-[400px] bg-slate-200 rounded-[40px] overflow-hidden shadow-xl border border-slate-100 relative">
-                    <!-- PASTE IFRAME GOOGLE MAPS ASLI DI SINI -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15847.389330158858!2d110.82584131262323!3d-6.788424944010168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70dbf4fea1baf5%3A0x277e427f5bb6f4a5!2sFiesphere%20English%20Course!5e0!3m2!1sid!2sid!4v1769430316303!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+
+                    {{-- Baris 3: Gender & Birth Date --}}
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Jenis Kelamin</label>
+                            <select name="gender" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue appearance-none">
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Tanggal Lahir</label>
+                            <input type="date" name="birth_date" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all" required>
+                        </div>
+                    </div>
+
+                    {{-- Baris 4: Address --}}
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Alamat Lengkap</label>
+                        <textarea name="address" rows="2" placeholder="Tuliskan alamat domisili saat ini..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all" required></textarea>
+                    </div>
+
+                    {{-- Baris 5: Education & Program --}}
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Jenjang Pendidikan</label>
+                            <select name="education" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue" required>
+                                <option value="">Pilih Jenjang...</option>
+                                <option>SD (Kelas 4-6)</option>
+                                <option>SMP/MTs</option>
+                                <option>SMA/MA/SMK</option>
+                                <option>Mahasiswa/Umum</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Program Pilihan</label>
+                            <select name="program" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue" required>
+                                <option value="">Pilih Program...</option>
+                                <optgroup label="Reguler">
+                                    <option>Reguler 2 Minggu</option>
+                                    <option>Reguler 1 Bulan</option>
+                                    <option>Reguler 2 Bulan</option>
+                                </optgroup>
+                                <optgroup label="Weekend">
+                                    <option>Weekend 2 Minggu</option>
+                                    <option>Weekend 1 Bulan</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- Baris 6: Schedule, Shirt, Source --}}
+                    <div class="grid md:grid-cols-3 gap-4 border-t border-slate-100 pt-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Jadwal Kelas</label>
+                            <div class="flex flex-col gap-2 mt-2">
+                                <label class=" flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="16:30" class="accent-fiesphere-blue" required> 16:30</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="18:30" class="accent-fiesphere-blue" required> 18:30</label>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Ukuran Kaos</label>
+                            <select name="shirt_size" class="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm" required>
+                                <option value="">Pilih...</option>
+                                <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Sumber Informasi</label>
+                            <select name="source" class="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm" required>
+                                <option value="">Pilih...</option>
+                                <option>Instagram</option><option>TikTok</option><option>Teman</option><option>Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-fiesphere-yellow text-fiesphere-blue font-black rounded-2xl hover:bg-[#f0c400] transition-all shadow-lg text-lg uppercase tracking-widest mt-4">
+                        Kirim Pendaftaran
+                    </button>
+                </form>
             </div>
         </div>
-    </section>  
+    </div>
+</section>

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +13,15 @@ use App\Http\Controllers\PromoController;
 |--------------------------------------------------------------------------
 */
 
-// WAJIB pakai HomeController agar variabel $pricings tidak undefined di landing page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Form pendaftaran publik
-Route::post('/pendaftaran', [StudentController::class, 'store'])->name('pendaftaran.store');
+/**
+ * PERBAIKAN KRITIS: 
+ * Gunakan 'fsec.register.store' agar tidak bentrok dengan Laravel Breeze.
+ * Ini yang menyebabkan error "The password field is required".
+ */
+Route::post('/submit-pendaftaran', [RegisterController::class, 'store'])->name('fsec.register.store');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,29 +33,33 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Dashboard Utama
     Route::view('dashboard', 'dashboard')->name('dashboard');
-    // Semua rute di bawah akan otomatis diawali '/admin' dan nama 'admin.'
+
+    // Kelompok rute Admin (Semua rute di sini akan otomatis berawalan 'admin.')
     Route::prefix('admin')->name('admin.')->group(function () {
         
-        /* --- Manajemen Siswa & Pendaftaran --- */
-        Route::get('pendaftaran', [StudentController::class, 'pendaftaran'])->name('pendaftaran');
-        Route::get('siswa', [StudentController::class, 'siswa'])->name('siswa');
-        Route::post('pendaftaran/{id}/enroll', [StudentController::class, 'enroll'])->name('pendaftaran.enroll');
+        /* --- Manajemen Register (Pendaftar Baru) --- */
+        
+        // Menampilkan daftar pendaftar baru (Akses via route('admin.register.index'))
+        Route::get('registers', [RegisterController::class, 'index'])->name('register.index');
+        
+        // Proses memindahkan pendaftar menjadi siswa aktif (Akses via route('admin.register.enroll'))
+        Route::post('registers/{id}/enroll', [RegisterController::class, 'enroll'])->name('register.enroll');
 
-        // CRUD Siswa
+        /* --- Manajemen Siswa Aktif --- */
+        Route::get('siswa', [StudentController::class, 'index'])->name('siswa');
         Route::get('siswa/{id}/edit', [StudentController::class, 'edit'])->name('siswa.edit');
         Route::put('siswa/{id}', [StudentController::class, 'update'])->name('siswa.update');
         Route::delete('siswa/{id}', [StudentController::class, 'destroy'])->name('siswa.destroy');
 
         /* --- Manajemen Program & Pricing --- */
-        // Pastikan ProgramController sudah punya method: index, create, store, edit, update, destroy
-        Route::get('program', [ProgramController::class, 'index'])->name('program.index'); // Ubah dari 'program'
+        Route::get('program', [ProgramController::class, 'index'])->name('program.index');
         Route::get('program/create', [ProgramController::class, 'create'])->name('program.create');
         Route::post('program', [ProgramController::class, 'store'])->name('program.store');
         Route::get('program/{id}/edit', [ProgramController::class, 'edit'])->name('program.edit');
         Route::put('program/{id}', [ProgramController::class, 'update'])->name('program.update');
         Route::delete('program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
 
-        // RUTE PROMO & EVENT
+        /* --- Manajemen Promo & Event --- */
         Route::get('promo', [PromoController::class, 'index'])->name('promo.index');
         Route::get('promo/create', [PromoController::class, 'create'])->name('promo.create');
         Route::post('promo', [PromoController::class, 'store'])->name('promo.store');

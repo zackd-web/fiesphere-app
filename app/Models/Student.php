@@ -20,12 +20,19 @@ class Student extends Model
      * Wajib diisi supaya Student::create() di Controller jalan.
      */
     protected $fillable = [
-        'name',
-        'whatsapp',
-        'method',
-        'program',
+        'email', 
+        'name', 
+        'nickname', // Pastikan sudah ditambah
+        'whatsapp', 
+        'gender',   // Pastikan sudah ditambah
+        'birth_date', 
+        'address', 
+        'education', 
+        'program', 
+        'schedule', 
+        'shirt_size', 
+        'source', 
         'status',
-        'note',
     ];
 
     /**
