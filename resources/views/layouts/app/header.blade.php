@@ -36,7 +36,7 @@
                         icon="book-open-text"
                         href="https://laravel.com/docs/starter-kits#livewire"
                         target="_blank"
-                        :label="__('Documentation')"
+                        label="Documentation"
                     />
                 </flux:tooltip>
             </flux:navbar>

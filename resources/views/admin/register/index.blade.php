@@ -111,4 +111,26 @@
             </flux:table>
         </flux:card>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // Inisialisasi koneksi
+    const supabaseClient = supabase.createClient(
+    "{{ config('services.supabase.url') }}", 
+    "{{ config('services.supabase.key') }}"
+    );
+
+    supabaseClient
+        .channel('pendaftaran-baru')
+        .on('postgres_changes', { 
+            event: 'INSERT', 
+            schema: 'public', 
+            table: 'registrations' 
+        }, (payload) => {
+            console.log('Ada pendaftar baru!', payload.new);
+            window.location.reload(); 
+        })
+        .subscribe();
+</script>
 </x-app>

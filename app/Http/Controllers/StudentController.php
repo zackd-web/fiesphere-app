@@ -11,14 +11,9 @@ class StudentController extends Controller
      * Menampilkan daftar siswa yang sudah resmi (enrolled/active).
      * Sesuai dengan route('admin.siswa.index')
      */
-    public function index()
-    {
-        // Kita hanya mengambil siswa yang statusnya 'active' atau 'enrolled'
-        $activeStudents = Student::where('status', 'active')
-            ->orWhere('status', 'enrolled')
-            ->latest()
-            ->get();
-
+    public function index() {
+    // Ambil dari tabel yang sama, tapi filter yang sudah active
+        $activeStudents = \App\Models\Registration::where('status', 'active')->latest()->get();
         return view('admin.siswa', compact('activeStudents'));
     }
 
