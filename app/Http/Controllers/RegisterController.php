@@ -42,7 +42,7 @@ class RegisterController extends Controller
         \App\Models\Registration::create($validated);
 
         // 3. Arahkan kembali ke home dengan pesan sukses
-        return redirect()->to(route('home') . '#register')
+        return redirect()->to(route('home') . '#home')
             ->with('success', 'Pendaftaran FSEC Berhasil! Kami akan segera menghubungi Anda.');
     }
 

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('promos', function (Blueprint $table) {
-            $table->char('id', 36)->primary(); //UUID konsisten
+            $table->id(); //UUID konsisten
             $table->string('title');
-            $table->string('image_url'); // Pake image_url buat simpan link Supabase Storage
+            $table->string('image_path'); // Pake image_url buat simpan link Supabase Storage
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
