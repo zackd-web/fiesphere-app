@@ -49,7 +49,7 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
+    <!-- Stats Section
     <div class="relative -mt-10 z-30 container mx-auto px-6">
         <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="text-center">
@@ -69,4 +69,4 @@
                 <p class="text-sm text-slate-500 font-medium">Kepuasan Siswa</p>
             </div>
         </div>
-    </div>
+    </div> -->

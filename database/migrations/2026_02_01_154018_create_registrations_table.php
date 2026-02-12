@@ -11,7 +11,7 @@ return new class extends Migration
      */
    public function up(): void{
     Schema::create('registrations', function (Blueprint $table) {
-        $table->char('id', 36)->primary();
+        $table->id();
         $table->string('name');
         $table->string('nickname'); // TAMBAHKAN INI
         $table->string('email')->unique();

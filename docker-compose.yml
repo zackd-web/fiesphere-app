@@ -36,6 +36,22 @@ services:
     networks:
       - fiesphere-network
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: fiesphere-pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - "8081:80"
+    networks:
+      - fiesphere-network
+    depends_on:
+      - db
+
 networks:
   fiesphere-network:
     driver: bridge

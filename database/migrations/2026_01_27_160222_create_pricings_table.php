@@ -13,11 +13,11 @@ return new class extends Migration
     {
         // Run: php artisan make:migration create_pricings_table
        Schema::create('pricings', function (Blueprint $table) {
-            $table->char('id', 36)->primary();
+            $table->id();
             $table->string('title');
             $table->string('price');
             $table->string('duration')->default('/ bulan');
-            $table->jsonb('features'); // Isinya array: ["8x Pertemuan", "Grup WA", ...]
+            $table->json('features'); // Isinya array: ["8x Pertemuan", "Grup WA", ...]
             $table->string('button_text')->default('Pilih Paket');
             $table->string('button_link')->default('#register');
             $table->boolean('is_featured')->default(false); // Buat nentuin mana yang warnanya biru/tengah
