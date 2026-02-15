@@ -27,7 +27,6 @@
                         </div>
                         <div class="flex items-center gap-4 border-t border-slate-50 pt-6">
                             {{-- Pake Inisial biar gak kosong melompong --}}
-                            <div class="w-12 h-12 bg-fiesphere-blue rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">ZA</div>
                             <div>
                                 <h5 class="font-bold text-fiesphere-blue uppercase leading-none mb-1">Zaka Al-Izza</h5>
                                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Student - Speaking Class</p>
@@ -51,7 +50,6 @@
                         </div>
                         <div class="flex items-center gap-4 border-t border-slate-50 pt-6">
                             {{-- Pake Inisial biar gak kosong melompong --}}
-                            <div class="w-12 h-12 bg-fiesphere-blue rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">ZA</div>
                             <div>
                                 <h5 class="font-bold text-fiesphere-blue uppercase leading-none mb-1">Zaka Al-Izza</h5>
                                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Student - Speaking Class</p>
@@ -75,7 +73,6 @@
                         </div>
                         <div class="flex items-center gap-4 border-t border-slate-50 pt-6">
                             {{-- Pake Inisial biar gak kosong melompong --}}
-                            <div class="w-12 h-12 bg-fiesphere-blue rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">ZA</div>
                             <div>
                                 <h5 class="font-bold text-fiesphere-blue uppercase leading-none mb-1">Zaka Al-Izza</h5>
                                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Student - Speaking Class</p>
@@ -99,7 +96,6 @@
                         </div>
                         <div class="flex items-center gap-4 border-t border-slate-50 pt-6">
                             {{-- Pake Inisial biar gak kosong melompong --}}
-                            <div class="w-12 h-12 bg-fiesphere-blue rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">ZA</div>
                             <div>
                                 <h5 class="font-bold text-fiesphere-blue uppercase leading-none mb-1">Zaka Al-Izza</h5>
                                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Student - Speaking Class</p>
@@ -123,7 +119,6 @@
                         </div>
                         <div class="flex items-center gap-4 border-t border-slate-50 pt-6">
                             {{-- Pake Inisial biar gak kosong melompong --}}
-                            <div class="w-12 h-12 bg-fiesphere-blue rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">ZA</div>
                             <div>
                                 <h5 class="font-bold text-fiesphere-blue uppercase leading-none mb-1">Zaka Al-Izza</h5>
                                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Student - Speaking Class</p>
