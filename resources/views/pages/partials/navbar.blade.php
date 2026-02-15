@@ -1,8 +1,7 @@
-<header class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+<header class="fixed w-full z-50 bg-fiesphere-white backdrop-blur-md border-b border-slate-100">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-fiesphere-blue rounded-lg flex items-center justify-center font-bold text-fiesphere-yellow text-xl">F</div>
-                <span class="text-2xl font-extrabold tracking-tight text-fiesphere-blue">FIESPHERE</span>
+                <img src="{{ asset('images/fiesphere.png') }}" alt="Logo Fiesphere" class="w-60 h-auto">
             </div>
             
             <div class="hidden lg:flex items-center gap-10 text-sm font-semibold text-fiesphere-blue uppercase tracking-wide">

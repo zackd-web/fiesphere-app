@@ -7,14 +7,7 @@
                 <p class="text-slate-500 mt-4 text-lg">Ribuan siswa telah membuktikan metode belajar kami. Sekarang giliran lu, bro!</p>
             </div>
             
-            <div class="flex gap-3">
-                <button id="testiPrev" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-left"></i>
-                </button>
-                <button id="testiNext" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-right"></i>
-                </button>
-            </div>
+            
         </div>
 
         <div class="relative overflow-hidden">
@@ -139,6 +132,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-center items-center gap-4 mt-10">
+            <button id="testiPrev" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all group">
+                <i data-lucide="chevron-left" class="group-hover:scale-110 transition-transform"></i>
+            </button>
+            <button id="testiNext" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all group">
+                <i data-lucide="chevron-right" class="group-hover:scale-110 transition-transform"></i>
+            </button>
         </div>
     </div>
 </section>

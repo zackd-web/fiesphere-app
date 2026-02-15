@@ -54,15 +54,6 @@
                 <h2 class="text-4xl font-extrabold text-fiesphere-blue mb-4">Promo & Event Mendatang</h2>
                 <p class="text-slate-500">Gulir ke samping untuk melihat berbagai penawaran menarik kami. Klik untuk memperbesar.</p>
             </div>
-            
-            <div class="hidden md:flex gap-3">
-                <button id="posterPrev" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-left"></i>
-                </button>
-                <button id="posterNext" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-right"></i>
-                </button>
-            </div>
         </div>
         
         <div id="posterSlider" class="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory scrollbar-hide scroll-smooth">
@@ -85,6 +76,15 @@
                     <p class="text-slate-400 italic">Belum ada promo atau event aktif saat ini.</p>
                 </div>
             @endforelse
+        </div>
+
+        <div class="flex justify-center items-center gap-4">
+            <button id="posterPrev" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all group">
+                <i data-lucide="chevron-left" class="group-hover:scale-110 transition-transform"></i>
+            </button>
+            <button id="posterNext" class="bg-white p-4 rounded-full border border-slate-300 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all group">
+                <i data-lucide="chevron-right" class="group-hover:scale-110 transition-transform"></i>
+            </button>
         </div>
     </div>
 </section>
