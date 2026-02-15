@@ -1,4 +1,4 @@
-<section id="programs" class="py-24 bg-fiesphere-light">
+<section id="programs" class="py-24 bg-fiesphere-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 space-y-4">
                 <h2 class="text-4xl font-extrabold text-fiesphere-blue">Program Unggulan</h2>

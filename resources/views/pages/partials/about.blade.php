@@ -1,4 +1,4 @@
-<section id="about" class="py-24 bg-fiesphere-light">
+<section id="about" class="py-24 bg-fiesphere-white">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="grid grid-cols-2 gap-4">

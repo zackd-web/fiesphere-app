@@ -1,4 +1,4 @@
-<section id="register" class="py-24 bg-slate-50">
+<section id="register" class="py-24 bg-fiepshere-white">
     {{-- MODAL BERHASIL (Success Modal) --}}
     @if(session('success'))
     <div id="successModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-fiesphere-blue/60 backdrop-blur-sm transition-all">
@@ -22,7 +22,10 @@
     </script>
     @endif
 
-    <div class="container mx-auto px-6">
+    <div class="container mx-auto px-3">
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-4xl font-extrabold text-fiesphere-blue">Ayo Daftar Sekarang</h2>
+        </div>
         <div class="max-w-6xl mx-auto bg-fiesphere-blue rounded-[40px] overflow-hidden shadow-2xl flex flex-col lg:flex-row">
             {{-- Sidebar Info --}}
             <div class="p-12 lg:w-1/3 text-white space-y-8 bg-pattern flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-blue-400/20">

@@ -12,7 +12,10 @@
         @include('pages.partials.about')
         @include('pages.partials.programs')
         @include('pages.partials.pricing')
+        @include('pages.partials.mentors')
         @include('pages.partials.register')
+        @include('pages.partials.faq')
+        @include('pages.partials.testimonials')
     </main>
     @include('pages.partials.contact')
 
