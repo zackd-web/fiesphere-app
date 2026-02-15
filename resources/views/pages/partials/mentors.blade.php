@@ -1,63 +1,69 @@
-<section id="mentors" class="py-20 bg-white overflow-hidden">
+<section id="mentors" class="py-24 bg-fiesphere-white overflow-hidden">
     <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <div class="text-center md:text-left">
-                <h4 class="text-fiesphere-yellow font-extrabold tracking-widest uppercase text-xs mb-2">Our Mentors</h4>
-                <h2 class="text-3xl font-extrabold text-fiesphere-blue">Para Ahli di Fiesphere</h2>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="max-w-2xl">
+                <h4 class="text-fiesphere-yellow font-extrabold tracking-widest uppercase text-sm mb-2">Expert Tutors</h4>
+                <h2 class="text-4xl font-extrabold text-fiesphere-blue">Belajar dari yang Terbaik</h2>
+                <p class="text-slate-500 mt-4 text-lg">Mentor kami bukan cuma jago teori, tapi punya skor resmi internasional dan pengalaman bertahun-tahun di Kampung Inggris.</p>
             </div>
             
-            <div class="flex gap-2">
-                <button id="mentorPrev" class="bg-slate-50 p-3 rounded-full border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            <div class="flex gap-3">
+                <button id="mentorPrev" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
+                    <i data-lucide="chevron-left"></i>
                 </button>
-                <button id="mentorNext" class="bg-slate-50 p-3 rounded-full border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
-                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                <button id="mentorNext" class="bg-white p-4 rounded-full shadow-lg border border-slate-100 text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all">
+                    <i data-lucide="chevron-right"></i>
                 </button>
             </div>
         </div>
 
-        <div class="relative overflow-hidden py-4">
-            <div id="mentorTrack" class="flex transition-transform duration-500 ease-out">
+        <div class="relative overflow-hidden py-6">
+            <div id="mentorTrack" class="flex transition-transform duration-700 cubic-bezier(0.4, 0, 0.2, 1)">
+                
                 {{-- Mentor Card 1 --}}
-                <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-2">
-                    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group overflow-hidden">
+                <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-3">
+                    <div class="bg-white rounded-[32px] border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full">
                         <div class="aspect-square relative bg-slate-100 overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Zaka+Al&background=1e3a8a&color=fff" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            {{-- Badge Skor ala Kampung Inggris --}}
+                            <div class="absolute top-4 left-4 z-20 bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-full text-[13px] font-black uppercase tracking-tighter shadow-lg">
+                                IELTS 8.0 Expert
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Shinji_Mikami_April_2013_3.jpg" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <div class="p-5 text-center">
-                            <h5 class="font-bold text-fiesphere-blue text-sm uppercase tracking-tight truncate">Ananda Zaka</h5>
-                            <p class="text-fiesphere-yellow font-bold text-[10px] uppercase mt-1">Lead Instructor</p>
+                        <div class="p-6 text-center border-t-4 border-fiesphere-blue">
+                            <h5 class="font-black text-fiesphere-blue text-lg uppercase leading-tight truncate">Ananda Zaka</h5>
+                            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Grammar & Structure Master</p>
+                            
+                            <div class="mt-4 flex flex-wrap justify-center gap-2">
+                                <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-100">Ex-Tutor Pare</span>
+                                <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-100">TESOL Certified</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Mentor Card 2 --}}
-                <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-2">
-                    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group overflow-hidden">
+                <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-3">
+                    <div class="bg-white rounded-[32px] border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full">
                         <div class="aspect-square relative bg-slate-100 overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Sam+Bridges&background=fbbf24&color=1e3a8a" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 z-20 bg-fiesphere-blue text-white px-3 py-1 rounded-full text-[13px] font-black uppercase tracking-tighter shadow-lg">
+                                TOEFL 600+
+                            </div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgLn4ajs9N4fyP-FU4f8B7YavqMS3kYDttIA&s" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <div class="p-5 text-center">
-                            <h5 class="font-bold text-fiesphere-blue text-sm uppercase tracking-tight truncate">Sam Bridges</h5>
-                            <p class="text-fiesphere-yellow font-bold text-[10px] uppercase mt-1">Speaking Expert</p>
+                        <div class="p-6 text-center border-t-4 border-fiesphere-yellow">
+                            <h5 class="font-black text-fiesphere-blue text-lg uppercase leading-tight truncate">Hideo Kojima</h5>
+                            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Speaking & Lore Expert</p>
+                            
+                            <div class="mt-4 flex flex-wrap justify-center gap-2">
+                                <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-100">8 Years Exp</span>
+                                <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-100">International Coach</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Mentor Card 3 --}}
-                <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-2">
-                    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group overflow-hidden">
-                        <div class="aspect-square relative bg-slate-100 overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Jon+Bellion&background=1e3a8a&color=fff" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 text-center">
-                            <h5 class="font-bold text-fiesphere-blue text-sm uppercase tracking-tight truncate">Jon Bellion</h5>
-                            <p class="text-fiesphere-yellow font-bold text-[10px] uppercase mt-1">Creative Coach</p>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Tambahin mentor 4, 5 dst supaya efek slide-nya kelihatan --}}
+                {{-- Tambahin 2 atau 3 mentor lagi di sini biar slidernya fungsi --}}
             </div>
         </div>
     </div>

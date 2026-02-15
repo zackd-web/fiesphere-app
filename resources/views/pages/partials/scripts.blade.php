@@ -170,35 +170,35 @@
         // Update slider on window resize biar responsifnya nggak rusak
         window.addEventListener('resize', updateSlider);
 
-       const mentorTrack = document.getElementById('mentorTrack');
-const mNextBtn = document.getElementById('mentorNext');
-const mPrevBtn = document.getElementById('mentorPrev');
-let mIndex = 0;
+        const mentorTrack = document.getElementById('mentorTrack');
+        const mNextBtn = document.getElementById('mentorNext');
+        const mPrevBtn = document.getElementById('mentorPrev');
+        let mIndex = 0;
 
-function updateMentorSlider() {
-    if(!mentorTrack) return;
-    const cardWidth = mentorTrack.firstElementChild.offsetWidth;
-    mentorTrack.style.transform = `translateX(-${mIndex * cardWidth}px)`;
-}
+        function updateMentorSlider() {
+            if(!mentorTrack) return;
+            const cardWidth = mentorTrack.firstElementChild.offsetWidth;
+            mentorTrack.style.transform = `translateX(-${mIndex * cardWidth}px)`;
+        }
 
-function nextMentor() {
-    const totalCards = mentorTrack.children.length;
-    // Sekarang 4 kolom di layar lebar (lg)
-    const visibleCards = window.innerWidth >= 1024 ? 4 : (window.innerWidth >= 640 ? 2 : 1);
-    
-    if (mIndex < totalCards - visibleCards) {
-        mIndex++;
-    } else {
-        mIndex = 0;
-    }
-    updateMentorSlider();
-}
+        function nextMentor() {
+            const totalCards = mentorTrack.children.length;
+            // Sekarang 4 kolom di layar lebar (lg)
+            const visibleCards = window.innerWidth >= 1024 ? 4 : (window.innerWidth >= 640 ? 2 : 1);
+            
+            if (mIndex < totalCards - visibleCards) {
+                mIndex++;
+            } else {
+                mIndex = 0;
+            }
+            updateMentorSlider();
+        }
 
-mNextBtn?.addEventListener('click', nextMentor);
-mPrevBtn?.addEventListener('click', () => {
-    if (mIndex > 0) mIndex--;
-    updateMentorSlider();
-});
+        mNextBtn?.addEventListener('click', nextMentor);
+        mPrevBtn?.addEventListener('click', () => {
+            if (mIndex > 0) mIndex--;
+            updateMentorSlider();
+        });
 
-window.addEventListener('resize', updateMentorSlider);
+        window.addEventListener('resize', updateMentorSlider);
     </script>
