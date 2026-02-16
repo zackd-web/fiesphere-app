@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\Registration;
 
 class StudentController extends Controller
 {
@@ -19,20 +19,28 @@ class StudentController extends Controller
 
     public function edit($id)
     {
-        $student = Student::findOrFail($id);
+        $student = Registration::findOrFail($id);
         return view('admin.edit_siswa', compact('student'));
     }
 
     public function update(Request $request, $id)
     {
-        $student = Student::findOrFail($id);
+        $student = Registration::findOrFail($id);
         
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:students,email,' . $id,
-            'whatsapp' => 'required|string|max:20',
-            'program' => 'required|string',
-            'status' => 'required|in:active,enrolled,inactive',
+            'name'       => 'required|string|max:255',
+            'nickname'   => 'required|string|max:100', // Sesuai kolom nickname
+            'email'      => 'required|email|unique:registrations,email,' . $id,
+            'whatsapp'   => 'required|string|max:20',
+            'gender'     => 'required|in:L,P', // Biasanya L/P
+            'birth_date' => 'required|date',
+            'address'    => 'required|string',
+            'education'  => 'required|string', // Contoh: SMP, SMA
+            'program'    => 'required|string',
+            'schedule'   => 'required|string', // Contoh: Weekend, Reguler
+            'shirt_size' => 'required|in:S,M,L,XL,XXL', // Sesuai kolom shirt_size
+            'source'     => 'required|string', // Contoh: TikTok, IG
+            'status'     => 'required|in:active,enrolled,inactive,pending', // Tambahin 'pending'
         ]);
 
         $student->update($validated);
@@ -42,7 +50,7 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
-        $student = Student::findOrFail($id);
+        $student = Registration::findOrFail($id);
         $student->delete();
 
         return redirect()->route('admin.siswa')->with('success', 'Data siswa berhasil dihapus.');
