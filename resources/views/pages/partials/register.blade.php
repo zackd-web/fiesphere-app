@@ -89,6 +89,12 @@
                         <textarea name="address" rows="2" placeholder="Domisili saat ini..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all" required>{{ old('address') }}</textarea>
                     </div>
 
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Asal Sekolah</label>
+                        <input type="text" name="school_origin" value="{{ old('school_origin') }}" placeholder="Sekolah Asal..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-fiesphere-blue outline-none transition-all">
+                    </div>
+
+
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Jenjang Pendidikan</label>
@@ -104,8 +110,17 @@
                             <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Program Pilihan</label>
                             <select name="program" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue" required>
                                 <option value="">Pilih...</option>
-                                <option value="Reguler" {{ old('program') == 'Reguler' ? 'selected' : '' }}>Reguler</option>
-                                <option value="Weekend" {{ old('program') == 'Weekend' ? 'selected' : '' }}>Weekend</option>
+                                <option value="Reguler 2 Minggu" {{ old('program') == 'Reguler 2 Minggu' ? 'selected' : '' }}>Reguler 2 Minggu</option>
+                                <option value="Reguler 1 Bulan" {{ old('program') == 'Reguler 1 Bulan' ? 'selected' : '' }}>Reguler 1 Bulan</option>
+                                <option value="Reguler 2 Bulan" {{ old('program') == 'Reguler 2 Bulan' ? 'selected' : '' }}>Reguler 2 Bulan</option>
+
+                                <option value="Weekend 2 Minggu" {{ old('program') == 'Weekend 2 Minggu' ? 'selected' : '' }}>Weekend 2 Minggu</option>
+                                <option value="Weekend 1 Bulan" {{ old('program') == 'Weekend 1 Bulan' ? 'selected' : '' }}>Weekend 1 Bulan</option>
+                                <option value="Weekend 2 Bulan" {{ old('program') == 'Weekend 2 Bulan' ? 'selected' : '' }}>Weekend 2 Bulan</option>
+
+                                <option value="Intensive 2 Minggu" {{ old('program') == 'Intensive 2 Minggu' ? 'selected' : '' }}>Intensive 2 Minggu</option>
+                                <option value="Intensive 1 Bulan" {{ old('program') == 'Intensive 1 Bulan' ? 'selected' : '' }}>Intensive 1 Bulan</option>                                
+                                <option value="Intensive 2 Bulan" {{ old('program') == 'Intensive 2 Bulan' ? 'selected' : '' }}>Intensive 2 Bulan</option>
                             </select>
                         </div>
                     </div>
@@ -114,16 +129,16 @@
                         <div class="space-y-1">
                             <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Jadwal</label>
                             <div class="flex flex-col gap-2 mt-2">
-                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="16:30" {{ old('schedule') == '16:30' ? 'checked' : '' }} required> 16:30</label>
-                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="18:30" {{ old('schedule') == '18:30' ? 'checked' : '' }} required> 18:30</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="16:30 - 17:30" {{ old('schedule') == '16:30 - 17:30' ? 'checked' : '' }} required> 16:30 - 17:30</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="18:30 - 20:00" {{ old('schedule') == '18:30 - 20:00' ? 'checked' : '' }} required> 18:30 - 20:00</label>
                             </div>
                         </div>
                         <div class="space-y-1">
-                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Ukuran Kaos</label>
-                            <select name="shirt_size" class="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm" required>
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Jenis Kelas</label>
+                            <select name="class_type" class="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm" required>
                                 <option value="">Pilih...</option>
-                                @foreach(['S', 'M', 'L', 'XL', 'XXL'] as $size)
-                                    <option value="{{ $size }}" {{ old('shirt_size') == $size ? 'selected' : '' }}>{{ $size }}</option>
+                                @foreach(['online', 'offline'] as $type)
+                                    <option value="{{ $type }}" {{ old('class_type') == $type ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
                                 @endforeach
                             </select>
                         </div>

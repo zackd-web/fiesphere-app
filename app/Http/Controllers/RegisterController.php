@@ -33,8 +33,9 @@ class RegisterController extends Controller
             'address'    => 'required|string',
             'education'  => 'required|string',
             'program'    => 'required|string',
+            'school_origin' => 'required|string|max:255',
+            'class_type'    => 'required|in:online,offline',
             'schedule'   => 'required|string',
-            'shirt_size' => 'required|string',
             'source'     => 'required|string',
         ]);
 

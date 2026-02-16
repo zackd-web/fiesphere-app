@@ -28,19 +28,20 @@ class StudentController extends Controller
         $student = Registration::findOrFail($id);
         
         $validated = $request->validate([
-            'name'       => 'required|string|max:255',
-            'nickname'   => 'required|string|max:100', // Sesuai kolom nickname
-            'email'      => 'required|email|unique:registrations,email,' . $id,
-            'whatsapp'   => 'required|string|max:20',
-            'gender'     => 'required|in:L,P', // Biasanya L/P
-            'birth_date' => 'required|date',
-            'address'    => 'required|string',
-            'education'  => 'required|string', // Contoh: SMP, SMA
-            'program'    => 'required|string',
-            'schedule'   => 'required|string', // Contoh: Weekend, Reguler
-            'shirt_size' => 'required|in:S,M,L,XL,XXL', // Sesuai kolom shirt_size
-            'source'     => 'required|string', // Contoh: TikTok, IG
-            'status'     => 'required|in:active,enrolled,inactive,pending', // Tambahin 'pending'
+            'name'          => 'required|string|max:255',
+            'nickname'      => 'required|string|max:100',
+            'email'         => 'required|email|unique:registrations,email,' . $id,
+            'whatsapp'      => 'required|string|max:20',
+            'gender'        => 'required|in:L,P',
+            'birth_date'    => 'required|date',
+            'address'       => 'required|string',
+            'school_origin' => 'nullable|string|max:255', // Kolom baru
+            'education'     => 'required|string',
+            'program'       => 'required|string',
+            'class_type'    => 'required|in:online,offline', // Kolom baru
+            'schedule'      => 'required|string',
+            'source'        => 'required|string',
+            'status'        => 'required|in:active,enrolled,inactive,pending',
         ]);
 
         $student->update($validated);
