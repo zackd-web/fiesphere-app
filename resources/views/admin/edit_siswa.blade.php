@@ -60,13 +60,18 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {{-- Lain-lain --}}
+                <!-- {{-- Lain-lain --}}
                 <flux:select label="Ukuran Kaos" name="shirt_size">
                     <option value="S" {{ old('shirt_size', $student->shirt_size) == 'S' ? 'selected' : '' }}>S</option>
                     <option value="M" {{ old('shirt_size', $student->shirt_size) == 'M' ? 'selected' : '' }}>M</option>
                     <option value="L" {{ old('shirt_size', $student->shirt_size) == 'L' ? 'selected' : '' }}>L</option>
                     <option value="XL" {{ old('shirt_size', $student->shirt_size) == 'XL' ? 'selected' : '' }}>XL</option>
                     <option value="XXL" {{ old('shirt_size', $student->shirt_size) == 'XXL' ? 'selected' : '' }}>XXL</option>
+                </flux:select> -->
+
+                <flux:select label="Jenis Kelas" name="class_type">
+                    <option value="online" {{ old('class_type', $student->class_type) == 'online' ? 'selected' : '' }}>Online</option>
+                    <option value="offline" {{ old('class_type', $student->class_type) == 'offline' ? 'selected' : '' }}>Offline</option>
                 </flux:select>
 
                 <flux:select label="Sumber Info" name="source">
