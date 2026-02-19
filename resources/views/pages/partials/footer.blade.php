@@ -3,8 +3,9 @@
         <div class="container mx-auto px-6 grid md:grid-cols-4 gap-12">
             <div class="col-span-2 space-y-6">
                 <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-fiesphere-yellow rounded-lg flex items-center justify-center font-bold text-fiesphere-blue text-xl">F</div>
-                    <span class="text-2xl font-extrabold tracking-tight">FIESPHERE</span>
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('images/fiesphere.png') }}" alt="Logo Fiesphere" class="w-60 h-auto">
+                    </div>
                 </div>
                 <p class="text-blue-100/60 max-w-sm">
                     Lembaga kursus bahasa Inggris yang berdedikasi untuk mencetak generasi unggul yang siap bersaing di kancah internasional.

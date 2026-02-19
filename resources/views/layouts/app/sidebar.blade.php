@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
 
-                    <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.pendaftaran')" :current="request()->routeIs('admin.pendaftaran')" wire:navigate>
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.register.index')" :current="request()->routeIs('admin.register.index')" wire:navigate>
                         {{ __('Pendaftaran') }}
                     </flux:sidebar.item>
 

@@ -1,0 +1,60 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fiesphere-app
+    volumes:
+      - .:/var/www
+    networks:
+      - fiesphere-network
+    depends_on:
+      - db # Laravel butuh DB buat jalanin migrasi
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: fiesphere-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - fiesphere-network
+
+  db: # TAMBAHAN: Mesin MySQL lo
+    image: mysql:8.0
+    container_name: fiesphere-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: fiesphere_db
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - fiesphere_db_data:/var/lib/mysql # Brankas data lo
+    networks:
+      - fiesphere-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: fiesphere-pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - "8081:80"
+    networks:
+      - fiesphere-network
+    depends_on:
+      - db
+
+networks:
+  fiesphere-network:
+    driver: bridge
+
+volumes: # DAFTARKAN BRANKASNYA DI SINI
+  fiesphere_db_data:

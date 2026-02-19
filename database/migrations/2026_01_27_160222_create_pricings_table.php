@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         // Run: php artisan make:migration create_pricings_table
-        Schema::create('pricings', function (Blueprint $table) {
+       Schema::create('pricings', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Contoh: Program 2 Minggu
-            $table->string('price'); // Contoh: 299k
+            $table->string('title');
+            $table->string('price');
             $table->string('duration')->default('/ bulan');
-            $table->string('badge')->nullable(); // Contoh: REKOMENDASI
             $table->json('features'); // Isinya array: ["8x Pertemuan", "Grup WA", ...]
             $table->string('button_text')->default('Pilih Paket');
             $table->string('button_link')->default('#register');

@@ -1,56 +1,58 @@
-<section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 bg-pattern overflow-hidden">
-        <div class="container mx-auto px-6 text-center"> <div class="text-white space-y-8 flex flex-col items-center"> <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-                     Belajar Bahasa Inggris di FieSphere Kudus<br> <span class="text-fiesphere-yellow">Lebih Cepat & Seru!</span>
+<section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-fiesphere-blue overflow-hidden">
+    <div class="hidden md:block absolute top-0 left-0 w-1/3 h-full bg-white/5 skew-x-12 pointer-events-none"></div>
+    <div class="hidden md:block absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-20">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+            
+            <div class="text-white space-y-8 w-full md:w-1/2 text-left">
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+                    Belajar Bahasa Inggris di 
+                    <span class="block">FieSphere Kudus</span>
+                    <span class="text-fiesphere-yellow">Lebih Cepat & Seru!</span>
                 </h1>
 
-                <p class="text-lg text-blue-100 max-w-lg mx-auto">
-                    Belajar bahasa Inggris dengan metode interaktif bersama mentor berpengalaman. Siapkan dirimu untuk karir global atau pendidikan luar negeri.
+                <p class="text-lg text-blue-100 max-w-lg">
+                    Belajar bahasa Inggris dengan metode interaktif bersama mentor berpengalaman. 
+                    Siapkan dirimu untuk karir global atau pendidikan luar negeri.
                 </p>
 
-                <div class="flex flex-wrap gap-4 pt-4 justify-center">
+                <div class="flex flex-wrap gap-4 pt-4">
                     <a href="#register" class="px-8 py-4 bg-fiesphere-yellow text-fiesphere-blue rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-xl">
                         Konsultasi Gratis
                     </a>
                     <a href="#programs" class="px-8 py-4 border-2 border-white/20 text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
-                        Liat Kelas
+                        Lihat Kelas
                     </a>
                 </div>
 
-                <div class="flex items-center gap-4 text-sm font-medium text-blue-200 justify-center">
-                    <div class="flex gap-4">
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="Instagram">
-                            <i data-lucide="instagram"></i>
-                        </a>
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="TikTok">
-                            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current"><path d="M12.525.02c1.31-.036 2.612.012 3.914-.03.116 1.133.515 2.22 1.253 3.107a6.666 6.666 0 0 0 3.328 2.21v4.067c-1.637-.11-3.23-.746-4.522-1.78a10.45 10.45 0 0 1-.225 3.33 6.66 6.66 0 0 1-5.69 5.345 6.685 6.685 0 0 1-7.465-5.38 6.67 6.67 0 0 1 4.545-7.79c.174-.054.354-.085.535-.116l-.004 4.148a2.53 2.53 0 0 0-2.093 2.76 2.522 2.522 0 0 0 2.458 2.296 2.522 2.522 0 0 0 2.525-2.525V0h4z"/></svg>
-                        </a>
-                        <a href="#" class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow hover:text-fiesphere-blue transition-all" title="Facebook">
-                            <i data-lucide="facebook"></i>
-                        </a>
-                    </div>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/fiesphere.english?igsh=OG1wNTZlc2I2N3F2&utm_source=qr" target="_blank" class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" title="Instagram">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@fiesphere.english?_t=ZS-8zLK1LGdHcd&_r=1" target="_blank" class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" title="TikTok">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                    </a>
+
+                    <a href="https://wa.me/6285292409545" target="_blank" class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" title="WhatsApp">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+
+                    <a href="https://maps.app.goo.gl/TBRCzPGAXJxzpPfw7?g_st=ipc" target="_blank" class="w-14 h-14 bg-slate-100 text-fiesphere-blue rounded-2xl flex items-center justify-center hover:bg-fiesphere-yellow transition-all" title="Google Maps">
+                        <i class="fas fa-map-location-dot text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+
+            <div class="relative w-full md:w-1/2 mt-12 md:mt-0 flex justify-center items-center">
+                <div class="absolute w-[90%] h-[90%] bg-fiesphere-yellow/20 rounded-[3rem] -rotate-6 top-4 left-4 -z-10"></div>
+
+                <div class="relative w-[80%] hidden md:block aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1887&auto=format&fit=crop"alt="Student Mentoring"class="w-full h-full md:block object-cover">
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <div class="relative -mt-10 z-30 container mx-auto px-6">
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center">
-                <h3 class="text-3xl font-extrabold text-fiesphere-blue mb-1">5+</h3>
-                <p class="text-sm text-slate-500 font-medium">Tahun Pengalaman</p>
-            </div>
-            <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-extrabold text-fiesphere-blue mb-1">20+</h3>
-                <p class="text-sm text-slate-500 font-medium">Mentor Ahli</p>
-            </div>
-            <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-extrabold text-fiesphere-blue mb-1">10+</h3>
-                <p class="text-sm text-slate-500 font-medium">Program Pilihan</p>
-            </div>
-            <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-extrabold text-fiesphere-blue mb-1">98%</h3>
-                <p class="text-sm text-slate-500 font-medium">Kepuasan Siswa</p>
-            </div>
-        </div>
     </div>
+</section>

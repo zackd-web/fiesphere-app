@@ -1,4 +1,4 @@
-<section id="pricing" class="py-24 bg-slate-50">
+<section id="pricing" class="py-24 bg-fiesphere-white">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-extrabold text-fiesphere-blue mb-4">Investasi Pendidikan Anda</h2>

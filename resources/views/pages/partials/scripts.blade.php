@@ -22,6 +22,8 @@
             document.body.style.overflow = 'hidden'; // Stop scroll
         }
 
+        
+
         function closePoster() {
             const modal = document.getElementById('posterModal');
             const modalImg = document.getElementById('modalImg');
@@ -55,6 +57,7 @@
 
         // Init Lucide Icons
         lucide.createIcons();
+        
 
         // Toggle mobile menu
         const toggle = document.getElementById('mobile-toggle');
@@ -78,4 +81,124 @@
                 header.classList.remove('shadow-lg');
             }
         });
+
+        // FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqButtons = document.querySelectorAll('.faq-btn');
+
+            faqButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.closest('.faq-item');
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('.faq-icon');
+
+                    // Tutup FAQ lain yang lagi kebuka
+                    document.querySelectorAll('.faq-content').forEach(otherContent => {
+                        if (otherContent !== content) {
+                            otherContent.style.maxHeight = null;
+                            otherContent.closest('.faq-item').classList.remove('border-fiesphere-blue', 'shadow-xl');
+                            const otherIcon = otherContent.previousElementSibling.querySelector('.faq-icon');
+                            if(otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Toggle item yang diklik
+                    if (content.style.maxHeight) {
+                        // Kalo lagi kebuka, tutup
+                        content.style.maxHeight = null;
+                        item.classList.remove('border-fiesphere-blue', 'shadow-xl');
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        // Kalo lagi tertutup, buka
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        item.classList.add('border-fiesphere-blue', 'shadow-xl');
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        });
+    
+        // Testimonial Slider Logic
+        const track = document.getElementById('testimonialTrack');
+        const prevBtn = document.getElementById('testiPrev');
+        const nextBtn = document.getElementById('testiNext');
+        let index = 0;
+
+        function updateSlider() {
+            const cardWidth = track.firstElementChild.offsetWidth;
+            track.style.transform = `translateX(-${index * cardWidth}px)`;
+        }
+
+        function nextSlide() {
+            const totalCards = track.children.length;
+            const visibleCards = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1);
+            
+            if (index < totalCards - visibleCards) {
+                index++;
+            } else {
+                index = 0; // Balik ke awal
+            }
+            updateSlider();
+        }
+
+        function prevSlide() {
+            if (index > 0) {
+                index--;
+            } else {
+                const visibleCards = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1);
+                index = track.children.length - visibleCards; // Ke akhir
+            }
+            updateSlider();
+        }
+
+        // Auto-slide interval (3 detik)
+        let autoSlide = setInterval(nextSlide, 3000);
+
+        // Event Listeners
+        nextBtn?.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            nextSlide();
+            autoSlide = setInterval(nextSlide, 3000); // Reset timer
+        });
+
+        prevBtn?.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            prevSlide();
+            autoSlide = setInterval(nextSlide, 3000); // Reset timer
+        });
+
+        // Update slider on window resize biar responsifnya nggak rusak
+        window.addEventListener('resize', updateSlider);
+
+        const mentorTrack = document.getElementById('mentorTrack');
+        const mNextBtn = document.getElementById('mentorNext');
+        const mPrevBtn = document.getElementById('mentorPrev');
+        let mIndex = 0;
+
+        function updateMentorSlider() {
+            if(!mentorTrack) return;
+            const cardWidth = mentorTrack.firstElementChild.offsetWidth;
+            mentorTrack.style.transform = `translateX(-${mIndex * cardWidth}px)`;
+        }
+
+        function nextMentor() {
+            const totalCards = mentorTrack.children.length;
+            // Sekarang 4 kolom di layar lebar (lg)
+            const visibleCards = window.innerWidth >= 1024 ? 4 : (window.innerWidth >= 640 ? 2 : 1);
+            
+            if (mIndex < totalCards - visibleCards) {
+                mIndex++;
+            } else {
+                mIndex = 0;
+            }
+            updateMentorSlider();
+        }
+
+        mNextBtn?.addEventListener('click', nextMentor);
+        mPrevBtn?.addEventListener('click', () => {
+            if (mIndex > 0) mIndex--;
+            updateMentorSlider();
+        });
+
+        window.addEventListener('resize', updateMentorSlider);
     </script>
