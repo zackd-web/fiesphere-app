@@ -1,15 +1,20 @@
-<section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 bg-pattern overflow-hidden">
-    <div class="container mx-auto px-6">
+<section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-fiesphere-blue overflow-hidden">
+    <div class="hidden md:block absolute top-0 left-0 w-1/3 h-full bg-white/5 skew-x-12 pointer-events-none"></div>
+    <div class="hidden md:block absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-20">
         <div class="flex flex-col md:flex-row items-center justify-between gap-12">
             
             <div class="text-white space-y-8 w-full md:w-1/2 text-left">
                 <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-                    Belajar Bahasa Inggris di <span class="block">FieSphere Kudus</span>
+                    Belajar Bahasa Inggris di 
+                    <span class="block">FieSphere Kudus</span>
                     <span class="text-fiesphere-yellow">Lebih Cepat & Seru!</span>
                 </h1>
 
                 <p class="text-lg text-blue-100 max-w-lg">
-                    Belajar bahasa Inggris dengan metode interaktif bersama mentor berpengalaman. Siapkan dirimu untuk karir global atau pendidikan luar negeri.
+                    Belajar bahasa Inggris dengan metode interaktif bersama mentor berpengalaman. 
+                    Siapkan dirimu untuk karir global atau pendidikan luar negeri.
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-4">
@@ -17,7 +22,7 @@
                         Konsultasi Gratis
                     </a>
                     <a href="#programs" class="px-8 py-4 border-2 border-white/20 text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
-                        Liat Kelas
+                        Lihat Kelas
                     </a>
                 </div>
 
@@ -38,12 +43,16 @@
                         <i class="fas fa-map-location-dot text-2xl"></i>
                     </a>
                 </div>
+            </div>
             
-                </div> 
-                <div class="w-full md:w-1/2 relative">
-                    <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-fiesphere-yellow/20 blur-3xl rounded-full"></div>
-                        <img src="{{ asset('images/student.png') }}" alt="Student Success" class="w-full h-auto object-cover transform md:scale-110 drop-shadow-2xl">
-                    </div>
+
+            <div class="relative w-full md:w-1/2 mt-12 md:mt-0 flex justify-center items-center">
+                <div class="absolute w-[90%] h-[90%] bg-fiesphere-yellow/20 rounded-[3rem] -rotate-6 top-4 left-4 -z-10"></div>
+
+                <div class="relative w-[80%] hidden md:block aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1887&auto=format&fit=crop"alt="Student Mentoring"class="w-full h-full md:block object-cover">
                 </div>
+            </div>
+        </div>
     </div>
 </section>
