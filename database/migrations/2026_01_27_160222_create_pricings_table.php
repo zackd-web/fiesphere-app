@@ -15,12 +15,13 @@ return new class extends Migration
        Schema::create('pricings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('price');
-            $table->string('duration')->default('/ bulan');
+            $table->decimal('price', 10, 2);
+            $table->string('duration')->default('pertemuan');
             $table->json('features'); // Isinya array: ["8x Pertemuan", "Grup WA", ...]
             $table->string('button_text')->default('Pilih Paket');
             $table->string('button_link')->default('#register');
             $table->boolean('is_featured')->default(false); // Buat nentuin mana yang warnanya biru/tengah
+            $table->boolean('is_active')->default(true); // Buat nentuin mana yang warnanya biru/tengah
             $table->timestamps();
         });
     }
