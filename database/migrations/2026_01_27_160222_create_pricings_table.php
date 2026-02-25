@@ -15,7 +15,7 @@ return new class extends Migration
        Schema::create('pricings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 0);
             $table->string('duration')->default('pertemuan');
             $table->json('features'); // Isinya array: ["8x Pertemuan", "Grup WA", ...]
             $table->string('button_text')->default('Pilih Paket');

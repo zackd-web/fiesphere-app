@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Registration extends Model
 {
@@ -10,6 +11,8 @@ class Registration extends Model
     protected $table = 'registrations'; // Pakai nama tabel hasil migrasi lu
     
     protected $fillable = [
+        'pricing_id',
+        'schedule_id',
         'name', 
         'nickname', 
         'email', 
@@ -19,10 +22,15 @@ class Registration extends Model
         'address', 
         'school_origin', // Kolom baru lu
         'education', 
-        'program', 
         'class_type',    // Kolom baru lu
-        'schedule', 
         'source',        // Ini penyebab error tadi
         'status'
     ];
+
+    public function pricing() {
+        return $this->belongsTo(Program::class);
+    }
+    public function schedule() {
+        return $this->belongsTo(Schedule::class);
+}   
 }

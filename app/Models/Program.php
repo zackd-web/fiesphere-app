@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illmuninate\Database\Eloquent\Relations\HasMany;
 
 class Program extends Model // Pastikan nama class sama dengan nama file
 {
@@ -18,4 +19,8 @@ class Program extends Model // Pastikan nama class sama dengan nama file
         'features' => 'array', // Casting ini WAJIB ada
         'is_featured' => 'boolean',
     ];
+
+    public function registrations(): HasMany {
+        return $this->hasMany(Registration::class);
+    }
 }

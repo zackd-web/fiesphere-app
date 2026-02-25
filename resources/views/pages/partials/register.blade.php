@@ -108,19 +108,11 @@
                         </div>
                         <div class="space-y-1">
                             <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Program Pilihan</label>
-                            <select name="program" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue" required>
+                            <select name = "pricing_id" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-fiesphere-blue" required>
                                 <option value="">Pilih...</option>
-                                <option value="Reguler 2 Minggu" {{ old('program') == 'Reguler 2 Minggu' ? 'selected' : '' }}>Reguler 2 Minggu</option>
-                                <option value="Reguler 1 Bulan" {{ old('program') == 'Reguler 1 Bulan' ? 'selected' : '' }}>Reguler 1 Bulan</option>
-                                <option value="Reguler 2 Bulan" {{ old('program') == 'Reguler 2 Bulan' ? 'selected' : '' }}>Reguler 2 Bulan</option>
-
-                                <option value="Weekend 2 Minggu" {{ old('program') == 'Weekend 2 Minggu' ? 'selected' : '' }}>Weekend 2 Minggu</option>
-                                <option value="Weekend 1 Bulan" {{ old('program') == 'Weekend 1 Bulan' ? 'selected' : '' }}>Weekend 1 Bulan</option>
-                                <option value="Weekend 2 Bulan" {{ old('program') == 'Weekend 2 Bulan' ? 'selected' : '' }}>Weekend 2 Bulan</option>
-
-                                <option value="Intensive 2 Minggu" {{ old('program') == 'Intensive 2 Minggu' ? 'selected' : '' }}>Intensive 2 Minggu</option>
-                                <option value="Intensive 1 Bulan" {{ old('program') == 'Intensive 1 Bulan' ? 'selected' : '' }}>Intensive 1 Bulan</option>                                
-                                <option value="Intensive 2 Bulan" {{ old('program') == 'Intensive 2 Bulan' ? 'selected' : '' }}>Intensive 2 Bulan</option>
+                                @foreach($pricings as $pricing)
+                                    <option value="{{ $pricing->id }}">{{ $pricing->title }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -129,8 +121,12 @@
                         <div class="space-y-1">
                             <label class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Jadwal</label>
                             <div class="flex flex-col gap-2 mt-2">
-                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="16:30 - 17:30" {{ old('schedule') == '16:30 - 17:30' ? 'checked' : '' }} required> 16:30 - 17:30</label>
-                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="schedule" value="18:30 - 20:00" {{ old('schedule') == '18:30 - 20:00' ? 'checked' : '' }} required> 18:30 - 20:00</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer">
+                                    @foreach($schedules as $schedule) 
+                                        <input type="radio" name="schedule_id" value="{{ $schedule->id }}">
+                                        {{ $schedule->time_range }}
+                                    @endforeach
+                                </label>
                             </div>
                         </div>
                         <div class="space-y-1">
