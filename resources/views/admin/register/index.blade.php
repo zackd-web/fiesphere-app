@@ -31,9 +31,9 @@
                                 <div class="text-xs text-zinc-500">{{ $item->email }}</div>
                             </flux:table.cell>
                             <flux:table.cell>{{ $item->whatsapp }}</flux:table.cell>
-                            <flux:table.cell>{{ $item->program }}</flux:table.cell>
+                            <flux:table.cell>{{ $item->pricing?->title }}</flux:table.cell>
                             <flux:table.cell>
-                                <flux:badge size="sm" :color="$item->status === 'pending' ? 'zinc' : 'blue'">
+                                <flux:badge size="sm" :color="$item->status === 'pending' ? 'red' : 'blue'">
                                     {{ ucfirst($item->status) }}
                                 </flux:badge>
                             </flux:table.cell>
@@ -75,11 +75,11 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Jadwal Kelas</label>
-                                    <p class="mt-1 font-medium">{{ $item->schedule }} WIB</p>
+                                    <p class="mt-1 font-medium">{{ $item->schedule?->time_range }} WIB</p>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Ukuran Kaos</label>
-                                    <flux:badge size="sm" color="yellow">{{ $item->shirt_size ?? '-' }}</flux:badge>
+                                    <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Pilihan Kelas</label>
+                                    <flux:badge size="sm" color="yellow">{{ $item->class_type ?? '-' }}</flux:badge>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Sumber Informasi</label>
@@ -111,26 +111,4 @@
             </flux:table>
         </flux:card>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-    // Inisialisasi koneksi
-    const supabaseClient = supabase.createClient(
-    "{{ config('services.supabase.url') }}", 
-    "{{ config('services.supabase.key') }}"
-    );
-
-    supabaseClient
-        .channel('pendaftaran-baru')
-        .on('postgres_changes', { 
-            event: 'INSERT', 
-            schema: 'public', 
-            table: 'registrations' 
-        }, (payload) => {
-            console.log('Ada pendaftar baru!', payload.new);
-            window.location.reload(); 
-        })
-        .subscribe();
-</script>
 </x-app>

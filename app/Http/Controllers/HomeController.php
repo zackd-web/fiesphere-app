@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Promo;
+use App\Models\Schedule;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,10 @@ class HomeController extends Controller
         // Kita ambil yang is_active-nya true aja biar promo basi nggak tampil
         $promos = Promo::where('is_active', true)->orderBy('created_at', 'desc')->get();
 
+        // Ambil data paket dan jadwal yang aktif dari database
+        $pricings = \App\Models\Program::where('is_active', true)->get();
+        $schedules = \App\Models\Schedule::where('is_active', true)->get();
         // 3. Kirim SEMUA data dalam SATU fungsi compact ke view
-        return view('pages.home', compact('programs', 'promos'));
+        return view('pages.home', compact('programs', 'promos', 'pricings', 'schedules'));
     }
 }

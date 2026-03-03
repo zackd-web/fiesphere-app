@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registration; // Gunakan ini, hapus Student karena sudah tidak dipakai
+use App\Models\Registration;
+use App\Models\Program;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -12,8 +14,12 @@ class RegisterController extends Controller
      */
     public function index() 
     {
-        // Ambil data dari tabel registrations dengan status pending
-        $registers = Registration::where('status', 'pending')->latest()->get();
+        // PERBAIKAN: Gunakan 'with' untuk Eager Loading agar tidak terjadi N+1 Query
+        $registers = Registration::with(['pricing', 'schedule'])
+            ->where('status', 'pending')
+            ->latest()
+            ->get();
+
         return view('admin.register.index', compact('registers'));
     }
 
@@ -22,27 +28,28 @@ class RegisterController extends Controller
      */
     public function store(Request $request) 
     {
-        // 1. Validasi field (Pastikan email unik di tabel registrations)
+        // 1. Validasi field (GANTI: Gunakan ID relasi, bukan string)
         $validated = $request->validate([
-            'email'      => 'required|email|unique:registrations,email',
-            'name'       => 'required|string|max:255',
-            'nickname'   => 'required|string|max:100',
-            'whatsapp'   => 'required|string',
-            'gender'     => 'required|in:L,P',
-            'birth_date' => 'required|date',
-            'address'    => 'required|string',
-            'education'  => 'required|string',
-            'program'    => 'required|string',
+            'email'         => 'required|email|unique:registrations,email',
+            'name'          => 'required|string|max:255',
+            'nickname'      => 'required|string|max:100',
+            'whatsapp'      => 'required|string',
+            'gender'        => 'required|in:L,P',
+            'birth_date'    => 'required|date',
+            'address'       => 'required|string',
+            'education'     => 'required|string',
             'school_origin' => 'required|string|max:255',
             'class_type'    => 'required|in:online,offline',
-            'schedule'   => 'required|string',
-            'source'     => 'required|string',
+            'source'        => 'required|string',
+            
+            // PERBAIKAN: Validasi keberadaan ID di tabel induk
+            'pricing_id'    => 'required|exists:pricings,id', 
+            'schedule_id'   => 'required|exists:schedules,id',
         ]);
 
-        // 2. Simpan ke database (PERBAIKAN: Gunakan Registration, bukan Register!)
-        \App\Models\Registration::create($validated);
+        // 2. Simpan ke database
+        Registration::create($validated);
 
-        // 3. Arahkan kembali ke home dengan pesan sukses
         return redirect()->to(route('home') . '#home')
             ->with('success', 'Pendaftaran FSEC Berhasil! Kami akan segera menghubungi Anda.');
     }
