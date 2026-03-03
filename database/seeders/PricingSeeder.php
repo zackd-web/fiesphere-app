@@ -22,21 +22,5 @@ class PricingSeeder extends Seeder
         'is_featured' => true,
         'is_active' => true,
         ]);
-
-        \App\Models\Program::create([
-            'title' => 'Weekend Class',
-            'price' => 300000,
-            'duration' => 'pertemuan',
-            'features' => ['8 Pertemuan', 'Grup Diskusi'],
-            'is_active' => true,
-        ]);
-
-        \App\Models\Program::create([
-            'title' => 'Ramadhan Class',
-            'price' => 400000,
-            'duration' => 'pertemuan',
-            'features' => ['8 Pertemuan', 'Grup Diskusi'],
-            'is_active' => true,
-        ]);
     }
 }

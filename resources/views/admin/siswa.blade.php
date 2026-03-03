@@ -44,11 +44,11 @@
                                 <flux:text class="font-mono text-xs">{{ $students->whatsapp }}</flux:text>
                             </flux:table.cell>
                             
-                            <flux:table.cell>{{ $students->program }}</flux:table.cell>
+                            <flux:table.cell>{{ $students->pricing?->title }}</flux:table.cell>
                             
                             <flux:table.cell>
                                 <flux:badge size="sm" color="blue" inset="top bottom">
-                                    {{ $students->schedule }} WIB
+                                    {{ $students->schedule->time_range }} WIB
                                 </flux:badge>
                             </flux:table.cell>
                             
