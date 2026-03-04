@@ -28,9 +28,9 @@ class Registration extends Model
     ];
 
     public function pricing() {
-        return $this->belongsTo(Program::class);
+        return $this->belongsTo(Program::class, 'pricing_id')->withTrashed();
     }
     public function schedule() {
         return $this->belongsTo(Schedule::class);
-}   
+    }   
 }
