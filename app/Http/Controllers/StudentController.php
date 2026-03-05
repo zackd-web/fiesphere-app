@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Registration;
+use App\Models\Schedule;
 
 class StudentController extends Controller
 {
@@ -12,22 +13,28 @@ class StudentController extends Controller
      * Sesuai dengan route('admin.siswa.index')
      */
     public function index() {
-    // Ambil dari tabel yang sama, tapi filter yang sudah active
+        // Ambil dari tabel yang sama, tapi filter yang sudah active
         $activeStudents = \App\Models\Registration::where('status', 'active')->latest()->get();
+        
         return view('admin.siswa', compact('activeStudents'));
     }
 
     public function edit($id)
     {
         $student = Registration::findOrFail($id);
-        return view('admin.edit_siswa', compact('student'));
-    }
+        $pricings = \App\Models\Program::withTrashed()->get();
+        $schedules = \App\Models\Schedule::select('id', 'time_range')->get();// Ambil semua jadwal, termasuk yang sudah dihapus
 
+        return view('admin.edit_siswa', compact('student', 'pricings', 'schedules'));
+    }
+    
     public function update(Request $request, $id)
     {
         $student = Registration::findOrFail($id);
         
         $validated = $request->validate([
+            'pricing_id' => 'required|exists:pricings,id',
+            'schedule_id' => 'required|exists:schedules,id',
             'name'          => 'required|string|max:255',
             'nickname'      => 'required|string|max:100',
             'email'         => 'required|email|unique:registrations,email,' . $id,
@@ -37,9 +44,7 @@ class StudentController extends Controller
             'address'       => 'required|string',
             'school_origin' => 'nullable|string|max:255', // Kolom baru
             'education'     => 'required|string',
-            'program'       => 'required|string',
             'class_type'    => 'required|in:online,offline', // Kolom baru
-            'schedule'      => 'required|string',
             'source'        => 'required|string',
             'status'        => 'required|in:active,enrolled,inactive,pending',
         ]);
