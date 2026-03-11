@@ -46,16 +46,23 @@
                     <option value="Mahasiswa/Umum" {{ old('education', $student->education) == 'Mahasiswa/Umum' ? 'selected' : '' }}>Mahasiswa/Umum</option>
                 </flux:select>
 
-                <flux:select label="Program" name="program">
-                    <option value="Reguler 2 Minggu" {{ old('program', $student->program) == 'Reguler 2 Minggu' ? 'selected' : '' }}>Reguler 2 Minggu</option>
-                    <option value="Reguler 1 Bulan" {{ old('program', $student->program) == 'Reguler 1 Bulan' ? 'selected' : '' }}>Reguler 1 Bulan</option>
-                    <option value="Weekend 1 Bulan" {{ old('program', $student->program) == 'Weekend 1 Bulan' ? 'selected' : '' }}>Weekend 1 Bulan</option>
-                    {{-- Tambahkan opsi lain sesuai kebutuhan --}}
+                <flux:select label="Program" name="pricing_id">
+                    <option value="">Pilih...</option>
+                    @foreach($pricings as $pricing)
+                        <option value="{{ $pricing->id }}" 
+                            {{ (old('pricing_id', $student->pricing_id) == $pricing->id) ? 'selected' : '' }}>
+                            {{ $pricing->title }} {{ $pricing->trashed() ? '(Non-Aktif)' : '' }}
+                        </option>
+                    @endforeach
                 </flux:select>
-
-                <flux:select label="Jadwal" name="schedule">
-                    <option value="16:30" {{ old('schedule', $student->schedule) == '16:30' ? 'selected' : '' }}>16:30 WIB</option>
-                    <option value="18:30" {{ old('schedule', $student->schedule) == '18:30' ? 'selected' : '' }}>18:30 WIB</option>
+                
+                <flux:select label="Jadwal" name="schedule_id">
+                    <label for="schedule">Pilih Jadwal:</label>
+                        @foreach($schedules as $item)
+                            <option value="{{ $item->id }}" {{ $student->schedule_id == $item->id ? 'selected' : '' }}>
+                                {{ $item->time_range }}
+                            </option>
+                        @endforeach
                 </flux:select>
             </div>
 

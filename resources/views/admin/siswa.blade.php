@@ -44,7 +44,7 @@
                                 <flux:text class="font-mono text-xs">{{ $students->whatsapp }}</flux:text>
                             </flux:table.cell>
                             
-                            <flux:table.cell>{{ $students->pricing?->title }}</flux:table.cell>
+                            <flux:table.cell>{{ $students->pricing?->title ?? "Program tidak di temukan" }}</flux:table.cell>
                             
                             <flux:table.cell>
                                 <flux:badge size="sm" color="blue" inset="top bottom">
