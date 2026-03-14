@@ -5,24 +5,27 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+@source inline("grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6");
+
+
+/* Paksa generate class yang dipakai secara dinamis */
+@source inline("bg-gradient-to-br from-blue-500 to-indigo-600 bg-blue-500/10 text-blue-600 bg-emerald-500/10 text-emerald-600 bg-amber-500/10 text-amber-600 border-zinc-700/60 tracking-widest tracking-tight animate-in fade-in slide-in-from-top-4");
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    /* Font bawaanmu */
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* WARNA KUSTOM FIESPHERE (Tambahkan di sini) */
     --color-fiesphere-blue: #1e3a8a;
     --color-fiesphere-yellow: #fbbf24;
     --color-fiesphere-light: #f8fafc;
     --color-fiesphere-white: #ffffff;
 
-    /* Konfigurasi zinc dan accent bawaanmu tetap biarkan */
     --color-zinc-50: #fafafa;
-    /* ... (dst) ... */
     --color-accent: var(--color-neutral-800);
 }
+
 @layer theme {
     .dark {
         --color-accent: var(--color-white);
@@ -32,7 +35,6 @@
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
@@ -47,7 +49,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -55,7 +57,3 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
-
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */

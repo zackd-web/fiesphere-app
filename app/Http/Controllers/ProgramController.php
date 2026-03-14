@@ -10,7 +10,9 @@ class ProgramController extends Controller // Nama class WAJIB sama dengan file
     public function index()
     {
         $programs = Program::all(); // Ganti jadi $programs biar sinkron
-        return view('admin.program.index', compact('programs'));
+        $activeProgram = \App\Models\Program::where('is_active', true)->count();
+        
+        return view('admin.program.index', compact('programs', 'activeProgram'));
     }
 
     public function create() {
