@@ -95,7 +95,7 @@
     <flux:card class="hidden md:block overflow-hidden p-0 border-zinc-700/40 shadow-sm rounded-xl">
         <flux:table>
             <flux:table.columns>
-                <flux:table.column class="ps-6">Pendaftar</flux:table.column>
+                <flux:table.column align="center">Pendaftar</flux:table.column>
                 <flux:table.column>Kontak</flux:table.column>
                 <flux:table.column>Program & Kelas</flux:table.column>
                 <flux:table.column>Jadwal</flux:table.column>
@@ -107,7 +107,7 @@
                 @forelse($registers as $item)
                     <flux:table.row class="hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors duration-150">
                         <flux:table.cell class="ps-6">
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3 pl-3">
                                 <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white uppercase">
                                     {{ mb_substr($item->name, 0, 2, 'UTF-8') }}
                                 </div>
