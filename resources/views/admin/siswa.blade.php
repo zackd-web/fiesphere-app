@@ -1,12 +1,21 @@
 <x-app>
     {{-- Header --}}
     <div class="flex flex-col gap-3 mb-6 md:flex-row md:items-center md:justify-between md:mb-8">
+        {{-- Kiri: Judul --}}
         <div>
-            <flux:heading size="xl" level="1" class="font-bold tracking-tight">Daftar Siswa Aktif</flux:heading>
-            <flux:subheading class="mt-1">Kelola seluruh data siswa di sistem Fiesphere.</flux:subheading>
+            <flux:heading size="xl" level="1" class="font-bold tracking-tight">Siswa Kursus FSEC</flux:heading>
+            <flux:subheading class="mt-1">Siswa yang terdaftar di sistem Fiesphere.</flux:subheading>
         </div>
-        <div class="w-full md:w-64">
-            <flux:input icon="magnifying-glass" placeholder="Cari nama atau email..." />
+
+        {{-- Search + Tombol dalam satu grup --}}
+        <div class="flex items-center gap-2">
+            <div class="w-full md:w-64">
+                <flux:input icon="magnifying-glass" placeholder="Cari nama atau email..." />
+            </div>
+
+            <flux:button href="{{'admin.create'}}" variant="primary" icon="plus">
+                Tambah Siswa
+            </flux:button>
         </div>
     </div>
 
@@ -57,6 +66,7 @@
     @endif
 
     {{-- MOBILE: Card List --}}
+
     <div class="flex flex-col gap-3 md:hidden">
         @forelse($activeStudents as $student)
             <flux:card class="p-4 border-zinc-700/40 shadow-sm space-y-3">
@@ -68,7 +78,7 @@
                         </div>
                         <div>
                             <div class="font-semibold text-sm text-zinc-800 dark:text-white">{{ $student->name }}</div>
-                            <div class="text-[11px] text-zinc-400 truncate max-w-45">{{ $student->email }}</div>
+                            <div class="text-[15px] text-zinc-400 truncate max-w-45">{{ $student->email }}</div>
                         </div>
                     </div>
                     {{-- Quick actions --}}
@@ -86,26 +96,33 @@
                 <flux:separator variant="subtle" />
 
                 {{-- Info row --}}
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <span class="text-zinc-400 block mb-0.5">Program</span>
-                        <span class="font-medium text-zinc-700 dark:text-zinc-200">{{ $student->pricing?->title ?? '—' }}</span>
+
+                <div class="flex items-end justify-between">
+                    <div class="space-y-2">
+                        <div>
+                            <span class="text-zinc-400 block mb-0.5">Program</span>
+                            <span class="font-medium text-zinc-700 dark:text-zinc-200">{{ $student->pricing?->title ?? '—' }}</span>
+                        </div>
+                        <div>
+                            <span class="text-zinc-400 block mb-0.5">Jadwal</span>
+                            <flux:badge size="sm" color="blue" variant="outline" class="font-semibold">
+                                {{ $student->schedule->time_range }} WIB
+                            </flux:badge>
+                        </div>
                     </div>
-                    <div>
-                        <span class="text-zinc-400 block mb-0.5">Kelas</span>
-                        <flux:badge size="sm" color="zinc" class="text-[10px] uppercase font-bold tracking-widest">
-                            {{ $student->class_type ?? '—' }}
-                        </flux:badge>
-                    </div>
-                    <div>
-                        <span class="text-zinc-400 block mb-0.5">Jadwal</span>
-                        <flux:badge size="sm" color="blue" variant="outline" class="font-semibold">
-                            {{ $student->schedule->time_range }} WIB
-                        </flux:badge>
-                    </div>
-                    <div>
-                        <span class="text-zinc-400 block mb-0.5">Kontak</span>
-                        <span class="font-mono text-zinc-600 dark:text-zinc-300">{{ $student->whatsapp }}</span>
+                    
+                    <div class="text-right align-center space-y-2">
+                        <div>
+                            <span class="text-zinc-400 block mb-0.5">Kontak</span>
+                            <span class="font-mono text-zinc-600 dark:text-zinc-300">{{ $student->whatsapp }}</span>
+                        </div>
+
+                        <div>
+                            <span class="text-zinc-400 block mb-0.5">Kelas</span>
+                            <flux:badge size="sm" color="zinc" class="text-[10px] uppercase font-bold tracking-widest">
+                                {{ $student->class_type ?? '—' }}
+                            </flux:badge>
+                        </div>
                     </div>
                 </div>
             </flux:card>
@@ -207,8 +224,8 @@
                         {{ mb_substr($student->name, 0, 2, 'UTF-8') }}
                     </div>
                     <div>
-                        <flux:heading size="lg" class="leading-tight">{{ $student->name }}</flux:heading>
-                        <flux:subheading class="text-xs">{{ $student->email }}</flux:subheading>
+                        <flux:heading size="lg" class=" text-m leading-tight">{{ $student->name }}</flux:heading>
+                        <flux:subheading class="text-m">{{ $student->email }}</flux:subheading>
                     </div>
                 </div>
             </div>
@@ -234,7 +251,7 @@
                 <flux:separator variant="subtle" />
                 <div class="space-y-0.5">
                     <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Alamat</flux:text>
-                    <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{{ $student->address ?? 'Alamat tidak tersedia.' }}</p>
+                    <p class="text-sm leading-relaxed text-zinc-800 dark:text-zinc-300">{{ $student->address ?? 'Alamat tidak tersedia.' }}</p>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <flux:modal.close><flux:button variant="ghost" size="sm">Tutup</flux:button></flux:modal.close>
