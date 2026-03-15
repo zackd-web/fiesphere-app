@@ -1,17 +1,53 @@
 <x-app>
-    {{-- Header Section --}}
-    <div class="mb-6">
-        <flux:heading size="xl" level="1">Daftar Siswa Aktif</flux:heading>
-        <flux:subheading>Daftar seluruh Siswa yang sudah resmi terdaftar di Fiesphere.</flux:subheading>
+    {{-- Header --}}
+    <div class="flex flex-col gap-3 mb-6 md:flex-row md:items-center md:justify-between md:mb-8">
+        <div>
+            <flux:heading size="xl" level="1" class="font-bold tracking-tight">Daftar Siswa Aktif</flux:heading>
+            <flux:subheading class="mt-1">Kelola seluruh data siswa di sistem Fiesphere.</flux:subheading>
+        </div>
+        <div class="w-full md:w-64">
+            <flux:input icon="magnifying-glass" placeholder="Cari nama atau email..." />
+        </div>
     </div>
 
-    <flux:separator variant="subtle" />
+    {{-- Stat Cards --}}
+    <div class="grid grid-cols-3 gap-3 mb-6 md:gap-6 md:mb-8">
+        <flux:card class="flex flex-col gap-2 p-4 md:flex-row md:items-center md:gap-4 md:p-5 border-zinc-700/40 shadow-sm">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500">
+                <flux:icon.users variant="outline" class="w-5 h-5" />
+            </div>
+            <div>
+                <flux:text size="xs" class="font-medium text-zinc-400">Total Siswa</flux:text>
+                <flux:heading size="lg" class="font-bold leading-tight">{{ count($activeStudents) }}</flux:heading>
+            </div>
+        </flux:card>
+
+        <flux:card class="flex flex-col gap-2 p-4 md:flex-row md:items-center md:gap-4 md:p-5 border-zinc-700/40 shadow-sm">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
+                <flux:icon.academic-cap variant="outline" class="w-5 h-5" />
+            </div>
+            <div>
+                <flux:text size="xs" class="font-medium text-zinc-400">Program</flux:text>
+                <flux:heading size="lg" class="font-bold leading-tight">{{ count($activePrograms ?? []) }}</flux:heading>
+            </div>
+        </flux:card>
+
+        <flux:card class="flex flex-col gap-2 p-4 md:flex-row md:items-center md:gap-4 md:p-5 border-zinc-700/40 shadow-sm">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500">
+                <flux:icon.clock variant="outline" class="w-5 h-5" />
+            </div>
+            <div>
+                <flux:text size="xs" class="font-medium text-zinc-400">Jadwal</flux:text>
+                <flux:heading size="lg" class="font-bold leading-tight text-sm md:text-xl">{{ $nearestSchedule ?? '—' }}</flux:heading>
+            </div>
+        </flux:card>
+    </div>
 
     {{-- Success Alert --}}
     @if(session('success'))
-        <div class="mt-6 flex items-center p-4 text-emerald-800 border-l-4 border-emerald-500 bg-emerald-50/10 dark:text-emerald-400 dark:bg-emerald-900/20 rounded-r-xl shadow-sm" role="alert">
+        <div class="mb-5 flex items-center p-4 text-emerald-800 border-l-4 border-emerald-500 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-900/20 rounded-r-xl shadow-sm animate-in fade-in slide-in-from-top-4" role="alert">
             <flux:icon.check-circle variant="mini" class="shrink-0 w-5 h-5 text-emerald-500" />
-            <div class="ms-3 text-sm font-medium tracking-wide">
+            <div class="ms-3 text-sm font-medium">
                 <span class="font-bold">Berhasil:</span> {{ session('success') }}
             </div>
             <button type="button" class="ms-auto p-1.5 text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-800/30 rounded-lg transition-colors" onclick="this.parentElement.remove()">
@@ -20,139 +56,210 @@
         </div>
     @endif
 
-    <div class="mt-6">
-        <flux:card class="overflow-hidden">
-            <flux:table>
-                <flux:table.columns>
-                    <flux:table.column>Nama & Email</flux:table.column>
-                    <flux:table.column>WhatsApp</flux:table.column>
-                    <flux:table.column>Program</flux:table.column>
-                    <flux:table.column>Jadwal</flux:table.column>
-                    <flux:table.column>Tanggal Join</flux:table.column>
-                    <flux:table.column align="center">Aksi</flux:table.column>
-                </flux:table.columns>
+    {{-- MOBILE: Card List --}}
+    <div class="flex flex-col gap-3 md:hidden">
+        @forelse($activeStudents as $student)
+            <flux:card class="p-4 border-zinc-700/40 shadow-sm space-y-3">
+                {{-- Top: Avatar + Nama + Aksi --}}
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white uppercase">
+                            {{ mb_substr($student->name, 0, 2, 'UTF-8') }}
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm text-zinc-800 dark:text-white">{{ $student->name }}</div>
+                            <div class="text-[11px] text-zinc-400 truncate max-w-45">{{ $student->email }}</div>
+                        </div>
+                    </div>
+                    {{-- Quick actions --}}
+                    <div class="flex items-center gap-1 shrink-0">
+                        <flux:modal.trigger name="detail-student-{{ $student->id }}">
+                            <flux:button size="sm" variant="subtle" class="h-8 px-2 text-xs">Detail</flux:button>
+                        </flux:modal.trigger>
+                        <flux:button size="sm" variant="ghost" icon="pencil-square" class="h-8 w-8" href="{{ route('admin.siswa.edit', $student->id) }}" />
+                        <flux:modal.trigger name="delete-student-{{ $student->id }}">
+                            <flux:button size="sm" variant="ghost" color="red" icon="trash" class="h-8 w-8" />
+                        </flux:modal.trigger>
+                    </div>
+                </div>
 
-                <flux:table.rows>
-                    @forelse($activeStudents as $students)
-                        <flux:table.row>
-                            <flux:table.cell>
-                                <div class="font-bold text-zinc-800 dark:text-white">{{ $students->name }}</div>
-                                <div class="text-xs text-zinc-500">{{ $students->email }}</div>
-                            </flux:table.cell>
-                            
-                            <flux:table.cell>
-                                <flux:text class="font-mono text-xs">{{ $students->whatsapp }}</flux:text>
-                            </flux:table.cell>
-                            
-                            <flux:table.cell>{{ $students->pricing?->title ?? "Program tidak di temukan" }}</flux:table.cell>
-                            
-                            <flux:table.cell>
-                                <flux:badge size="sm" color="blue" inset="top bottom">
-                                    {{ $students->schedule->time_range }} WIB
-                                </flux:badge>
-                            </flux:table.cell>
-                            
-                            <flux:table.cell>{{ $students->updated_at->format('d M Y') }}</flux:table.cell>
+                <flux:separator variant="subtle" />
 
-                            <flux:table.cell class="flex justify-center gap-1">
-                                {{-- Trigger Modal Detail --}}
-                                <flux:modal.trigger name="detail-student-{{ $students->id }}">
-                                    <flux:button size="sm" variant="subtle">Detail</flux:button>
-                                </flux:modal.trigger>
-
-                                {{-- Tombol Edit --}}
-                                <flux:button size="sm" variant="ghost" icon="pencil-square" href="{{ route('admin.siswa.edit', $students->id) }}" />
-
-                                {{-- Trigger Hapus --}}
-                                <flux:modal.trigger name="delete-student-{{ $students->id }}">
-                                    <flux:button size="sm" variant="ghost" color="red" icon="trash" />
-                                </flux:modal.trigger>
-
-                                {{-- Modal Detail students --}}
-                                <flux:modal name="detail-student-{{ $students->id }}" class="md:w-[600px] space-y-6">
-                                    <div>
-                                        <flux:heading size="lg">Profil Lengkap students</flux:heading>
-                                        <flux:subheading>Informasi akademik dan personal {{ $students->name }}</flux:subheading>
-                                    </div>
-
-                                    <div class="grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Nama Panggilan</label>
-                                            <p class="mt-1 font-medium">{{ $students->nickname ?? '-' }}</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Jenis Kelamin</label>
-                                            <p class="mt-1 font-medium">{{ $students->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Pendidikan</label>
-                                            <p class="mt-1 font-medium">{{ $students->education }}</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Tanggal Lahir</label>
-                                            <p class="mt-1 font-medium">{{ $students->birth_date ? \Carbon\Carbon::parse($students->birth_date)->format('d F Y') : '-' }}</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Jenis Kelas</label>
-                                            <flux:badge size="sm" color="yellow">{{ $students->class_type ?? '-' }}</flux:badge>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Sumber Info</label>
-                                            <p class="mt-1 font-medium">{{ $students->source }}</p>
-                                        </div>
-                                    </div>
-
-                                    <flux:separator variant="subtle" />
-
-                                    <div>
-                                        <label class="block text-xs font-bold text-zinc-400 uppercase tracking-wider">Alamat Lengkap</label>
-                                        <p class="mt-1 text-zinc-600 dark:text-zinc-300">{{ $students->address ?? 'Alamat tidak tersedia.' }}</p>
-                                    </div>
-
-                                    <div class="flex justify-end gap-2 pt-4">
-                                        <flux:button variant="ghost" x-on:click="$modal.close()">Tutup</flux:button>
-                                        <flux:button variant="primary" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $students->whatsapp) }}" target="_blank">
-                                            Kirim Pesan WA
-                                        </flux:button>
-                                    </div>
-                                </flux:modal>
-
-                                {{-- Modal Konfirmasi Hapus --}}
-                                <flux:modal name="delete-student-{{ $students->id }}" class="min-w-[22rem] max-w-md">
-                                    <form action="{{ route('admin.siswa.destroy', $students->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <div class="space-y-6">
-                                            <div class="flex flex-col items-center text-center">
-                                                <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-red-100/10 dark:bg-red-900/20">
-                                                    <flux:icon.exclamation-triangle class="h-10 w-10 text-red-600 dark:text-red-500" />
-                                                </div>
-                                                <flux:heading size="lg">Hapus Data students?</flux:heading>
-                                                <flux:text class="mt-2">Kamu akan menghapus seluruh catatan data atas nama</flux:text>
-                                                <p class="mt-2 text-xl font-black tracking-tight">{{ $students->name }}</p>
-                                                <p class="mt-4 text-xs font-medium text-red-600 dark:text-red-400">⚠️ Data tidak dapat dipulihkan setelah dihapus</p>
-                                            </div>
-
-                                            <div class="flex flex-col-reverse gap-3 pt-2">
-                                                <flux:modal.close><flux:button variant="ghost" class="w-full">Batal</flux:button></flux:modal.close>
-                                                <flux:button type="submit" variant="filled" class="w-full bg-red-600 hover:bg-red-700 text-white shadow-lg border-0">Hapus Data</flux:button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </flux:modal>
-                            </flux:table.cell>
-                        </flux:table.row>
-                    @empty
-                        <flux:table.row>
-                            <flux:table.cell colspan="5" class="py-12 text-center">
-                                <flux:icon.users class="mx-auto h-12 w-12 text-zinc-300" />
-                                <flux:heading class="mt-4">Tidak ada students ditemukan</flux:heading>
-                            </flux:table.cell>
-                        </flux:table.row>
-                    @endforelse
-                </flux:table.rows>
-            </flux:table>
-        </flux:card>
+                {{-- Info row --}}
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <span class="text-zinc-400 block mb-0.5">Program</span>
+                        <span class="font-medium text-zinc-700 dark:text-zinc-200">{{ $student->pricing?->title ?? '—' }}</span>
+                    </div>
+                    <div>
+                        <span class="text-zinc-400 block mb-0.5">Kelas</span>
+                        <flux:badge size="sm" color="zinc" class="text-[10px] uppercase font-bold tracking-widest">
+                            {{ $student->class_type ?? '—' }}
+                        </flux:badge>
+                    </div>
+                    <div>
+                        <span class="text-zinc-400 block mb-0.5">Jadwal</span>
+                        <flux:badge size="sm" color="blue" variant="outline" class="font-semibold">
+                            {{ $student->schedule->time_range }} WIB
+                        </flux:badge>
+                    </div>
+                    <div>
+                        <span class="text-zinc-400 block mb-0.5">Kontak</span>
+                        <span class="font-mono text-zinc-600 dark:text-zinc-300">{{ $student->whatsapp }}</span>
+                    </div>
+                </div>
+            </flux:card>
+        @empty
+            <flux:card class="p-12 text-center border-zinc-700/40">
+                <flux:icon.users class="mx-auto h-10 w-10 text-zinc-300 mb-3" />
+                <flux:heading class="text-zinc-400 font-semibold">Belum ada siswa</flux:heading>
+            </flux:card>
+        @endforelse
     </div>
+
+    {{-- DESKTOP: Table --}}
+    <flux:card class="hidden md:block overflow-hidden p-0 border-zinc-700/40 shadow-sm rounded-xl">
+        <flux:table>
+            <flux:table.columns>
+                <flux:table.column align="center">Siswa</flux:table.column>
+                <flux:table.column>Kontak</flux:table.column>
+                <flux:table.column>Program & Kelas</flux:table.column>
+                <flux:table.column>Jadwal</flux:table.column>
+                <flux:table.column>Diperbarui</flux:table.column>
+                <flux:table.column align="center">Aksi</flux:table.column>
+            </flux:table.columns>
+
+            <flux:table.rows>
+                @forelse($activeStudents as $student)
+                    <flux:table.row class="hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors duration-150">
+                        <flux:table.cell>
+                            <div class="flex items-center gap-3 pl-3">
+                                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white uppercase">
+                                    {{ mb_substr($student->name, 0, 2, 'UTF-8') }}
+                                </div>
+                                <div>
+                                    <div class="ps-2 font-semibold text-sm text-zinc-800 dark:text-white leading-tight">{{ $student->name }}</div>
+                                    <div class="text-[15px] text-zinc-400 mt-0.5 truncate max-w-50">{{ $student->email }}</div>
+                                </div>
+                            </div>
+                        </flux:table.cell>
+
+                        <flux:table.cell>
+                            <div class="flex items-center gap-1.5">
+                                <flux:icon.phone variant="mini" class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                                <span class="font-mono text-[15px] text-zinc-600 dark:text-zinc-300 tracking-tight">{{ $student->whatsapp }}</span>
+                            </div>
+                        </flux:table.cell>
+
+                        <flux:table.cell>
+                            <div class="space-y-1">
+                                <div class="text-sm font-medium text-zinc-700 dark:text-zinc-200">{{ $student->pricing?->title ?? '—' }}</div>
+                                @if($student->class_type)
+                                    <flux:badge size="sm" color="zinc" class="text-[10px] uppercase font-bold tracking-widest">{{ $student->class_type }}</flux:badge>
+                                @endif
+                            </div>
+                        </flux:table.cell>
+
+                        <flux:table.cell>
+                            <flux:badge size="sm" color="blue" variant="outline" class="font-semibold whitespace-nowrap">
+                                {{ $student->schedule->time_range }} WIB
+                            </flux:badge>
+                        </flux:table.cell>
+
+                        <flux:table.cell>
+                            <span class="text-xs text-white-300">{{ $student->updated_at->diffForHumans() }}</span>
+                        </flux:table.cell>
+
+                        <flux:table.cell align="center">
+                            <div class="flex items-center justify-center gap-1">
+                                <flux:modal.trigger name="detail-student-{{ $student->id }}">
+                                    <flux:button size="sm" variant="subtle" class="h-8 px-3 text-xs">Detail</flux:button>
+                                </flux:modal.trigger>
+                                <flux:button size="sm" variant="ghost" icon="pencil-square" class="h-8 w-8" href="{{ route('admin.siswa.edit', $student->id) }}" />
+                                <flux:modal.trigger name="delete-student-{{ $student->id }}">
+                                    <flux:button size="sm" variant="ghost" color="red" icon="trash" class="h-8 w-8" />
+                                </flux:modal.trigger>
+                            </div>
+                        </flux:table.cell>
+                    </flux:table.row>
+                @empty
+                    <flux:table.row>
+                        <flux:table.cell colspan="6">
+                            <div class="flex flex-col items-center justify-center py-20 text-center">
+                                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 mb-4">
+                                    <flux:icon.users class="h-8 w-8 text-zinc-300" />
+                                </div>
+                                <flux:heading class="text-zinc-400 font-semibold">Tidak ada siswa ditemukan</flux:heading>
+                            </div>
+                        </flux:table.cell>
+                    </flux:table.row>
+                @endforelse
+            </flux:table.rows>
+        </flux:table>
+    </flux:card>
+
+    {{-- Modals (di luar loop) --}}
+    @foreach($activeStudents as $student)
+        <flux:modal name="detail-student-{{ $student->id }}" class="md:w-137.5 p-0 overflow-hidden rounded-xl">
+            <div class="bg-zinc-50 dark:bg-zinc-900 px-6 py-5 border-b border-zinc-200 dark:border-zinc-800">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white uppercase">
+                        {{ mb_substr($student->name, 0, 2, 'UTF-8') }}
+                    </div>
+                    <div>
+                        <flux:heading size="lg" class="leading-tight">{{ $student->name }}</flux:heading>
+                        <flux:subheading class="text-xs">{{ $student->email }}</flux:subheading>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 space-y-5">
+                <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+                    <div class="space-y-0.5">
+                        <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Nama Panggilan</flux:text>
+                        <p class="font-medium text-sm">{{ $student->nickname ?? '—' }}</p>
+                    </div>
+                    <div class="space-y-0.5">
+                        <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Jenis Kelamin</flux:text>
+                        <p class="font-medium text-sm">{{ $student->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</p>
+                    </div>
+                    <div class="space-y-0.5">
+                        <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Pendidikan</flux:text>
+                        <p class="font-medium text-sm">{{ $student->education ?? '—' }}</p>
+                    </div>
+                    <div class="space-y-0.5">
+                        <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Tanggal Lahir</flux:text>
+                        <p class="font-medium text-sm">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->translatedFormat('d F Y') : '—' }}</p>
+                    </div>
+                </div>
+                <flux:separator variant="subtle" />
+                <div class="space-y-0.5">
+                    <flux:text size="xs" class="uppercase font-bold text-zinc-400 tracking-widest">Alamat</flux:text>
+                    <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{{ $student->address ?? 'Alamat tidak tersedia.' }}</p>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <flux:modal.close><flux:button variant="ghost" size="sm">Tutup</flux:button></flux:modal.close>
+                    <flux:button variant="primary" size="sm" icon="chat-bubble-left-right" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $student->whatsapp) }}" target="_blank">WhatsApp</flux:button>
+                </div>
+            </div>
+        </flux:modal>
+
+        <flux:modal name="delete-student-{{ $student->id }}" class="max-w-sm rounded-xl">
+            <form action="{{ route('admin.siswa.destroy', $student->id) }}" method="POST">
+                @csrf @method('DELETE')
+                <div class="p-4 text-center">
+                    <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 mb-4">
+                        <flux:icon.exclamation-triangle class="h-7 w-7 text-red-600" />
+                    </div>
+                    <flux:heading size="lg">Hapus Data Siswa?</flux:heading>
+                    <flux:text class="mt-2 text-sm text-zinc-500">
+                        Seluruh data <span class="font-semibold text-zinc-700 dark:text-zinc-200">{{ $student->name }}</span> akan dihapus permanen.
+                    </flux:text>
+                    <div class="mt-6 flex flex-col gap-2">
+                        <flux:button type="submit" variant="filled" color="red" class="w-full">Ya, Hapus Sekarang</flux:button>
+                        <flux:modal.close><flux:button variant="ghost" class="w-full">Batal</flux:button></flux:modal.close>
+                    </div>
+                </div>
+            </form>
+        </flux:modal>
+    @endforeach
 </x-app>
