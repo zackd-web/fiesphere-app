@@ -15,8 +15,7 @@
                         <div>
                             <h4 class="text-lg font-bold text-blue-200 uppercase tracking-widest mb-2">{{ $plan->title }}</h4>
                             <div class="flex items-end gap-1">
-                                <span class="text-4xl font-extrabold text-fiesphere-yellow">Rp {{ $plan->price }}</span>
-                                <span class="text-blue-300 text-sm mb-1">{{ $plan->duration }}</span>
+                                <span class="text-4xl font-extrabold">Rp {{ number_format($plan->price, 0, ',', '.') }}</span>
                             </div>
                         </div>
                         <ul class="space-y-4 font-medium text-blue-100">
@@ -31,8 +30,7 @@
                         <div>
                             <h4 class="text-lg font-bold text-slate-400 uppercase tracking-widest mb-2">{{ $plan->title }}</h4>
                             <div class="flex items-end gap-1">
-                                <span class="text-4xl font-extrabold text-fiesphere-blue">Rp {{ $plan->price }}</span>
-                                <span class="text-slate-400 text-sm mb-1">{{ $plan->duration }}</span>
+                                <span class="text-4xl font-extrabold text-fiesphere-blue">Rp {{ number_format($plan->price, 0, ',', '.') }}</span>
                             </div>
                         </div>
                         <ul class="space-y-4 text-slate-600 font-medium">

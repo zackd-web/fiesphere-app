@@ -17,7 +17,6 @@
                 <div class="flex items-start justify-between gap-3">
                     <div>
                         <div class="font-bold text-sm text-zinc-800 dark:text-white">{{ $item->title }}</div>
-                        <div class="text-xs text-zinc-400 mt-0.5">{{ $item->price }} · {{ $item->duration }}</div>
                     </div>
                     @if($item->is_featured)
                         <flux:badge color="blue" size="sm" class="shrink-0">Rekomendasi</flux:badge>
@@ -54,7 +53,7 @@
         <flux:table>
             <flux:table.columns>
                 <flux:table.column align="center">Nama Paket</flux:table.column>
-                <flux:table.column>Harga & Durasi</flux:table.column>
+                <flux:table.column>Harga</flux:table.column>
                 <flux:table.column>Fitur</flux:table.column>
                 <flux:table.column>Status</flux:table.column>
                 <flux:table.column align="center">Aksi</flux:table.column>
@@ -68,8 +67,7 @@
                         </flux:table.cell>
 
                         <flux:table.cell>
-                            <div class="text-sm font-semibold text-zinc-700 dark:text-zinc-200">{{ $item->price }}</div>
-                            <div class="text-xs text-zinc-400">{{ $item->duration }}</div>
+                            <div class="text-sm font-semibold text-zinc-700 dark:text-zinc-200">Rp {{ number_format($item->price, 0, ',', '.') }}</div>
                         </flux:table.cell>
 
                         <flux:table.cell>
