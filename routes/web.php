@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\MentorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('promo/{id}/edit', [PromoController::class, 'edit'])->name('promo.edit');
         Route::put('promo/{id}', [PromoController::class, 'update'])->name('promo.update');
         Route::delete('promo/{id}', [PromoController::class, 'destroy'])->name('promo.destroy');
+
+        // Rute untuk halaman mentor (sementara hanya view statis, bisa dikembangkan nanti)
+        Route::get('mentor', [MentorController::class, 'index'])->name('mentor.index');
 
         /* --- Halaman Statis Admin --- */
         Route::view('fasilitas', 'admin.fasilitas')->name('fasilitas');

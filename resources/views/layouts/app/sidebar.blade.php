@@ -36,6 +36,11 @@
                         {{ __('Promo & Event') }}
                     </flux:sidebar.item>
 
+                    <flux:sidebar.item icon="user-circle" :href="route('admin.mentor.index')" :current="request()->routeIs('admin.mentor.index')" wire:navigate>
+                        {{ __('Mentor') }}
+                    </flux:sidebar.item>
+
+
 
                 </flux:sidebar.group>
             </flux:sidebar.nav>
