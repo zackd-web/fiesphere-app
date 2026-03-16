@@ -68,8 +68,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('promo/{id}', [PromoController::class, 'update'])->name('promo.update');
         Route::delete('promo/{id}', [PromoController::class, 'destroy'])->name('promo.destroy');
 
-        // Rute untuk halaman mentor (sementara hanya view statis, bisa dikembangkan nanti)
+        // Rute untuk halaman mentor
         Route::get('mentor', [MentorController::class, 'index'])->name('mentor.index');
+        Route::get('mentor/create', [MentorController::class, 'create'])->name('mentor.create');
+        Route::post('mentor', [MentorController::class, 'store'])->name('mentor.store');
+        Route::get('mentor/{id}/edit', [MentorController::class, 'edit'])->name('mentor.edit');
+        Route::put('mentor/{id}', [MentorController::class, 'update'])->name('mentor.update');
+        Route::delete('mentor/{id}', [MentorController::class, 'destroy'])->name('mentor.destroy');
+
 
         /* --- Halaman Statis Admin --- */
         Route::view('fasilitas', 'admin.fasilitas')->name('fasilitas');

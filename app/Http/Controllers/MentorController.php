@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mentor;
+use Illuminate\Support\Facades\Storage;
+
 
 class MentorController extends Controller
 {
@@ -11,7 +14,8 @@ class MentorController extends Controller
      */
     public function index()
     {
-        //
+         $mentors = Mentor::orderBy('order')->get();
+        return view('admin.mentor.index', compact('mentors'));
     }
 
     /**
@@ -19,7 +23,7 @@ class MentorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.mentor.create');
     }
 
     /**
@@ -27,7 +31,24 @@ class MentorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'            => 'required|string|max:255',
+            'specialization'  => 'required|string|max:255',
+            'expertise_badge' => 'required|string|max:255',
+            'photo'           => 'required|image|max:2048',
+            'tags'            => 'nullable|array',
+            'tags.*'          => 'string|max:100',
+            'order'           => 'integer|min:0',
+            'is_active'       => 'nullable',
+        ]);
+
+        $validated['photo_path'] = $request->file('photo')->store('mentors', 'public');
+        $validated['is_active']  = $request->boolean('is_active');
+        $validated['tags']       = array_filter($request->input('tags', []));
+
+        Mentor::create($validated);
+
+        return redirect()->route('admin.mentor.index')->with('success', 'Mentor berhasil ditambahkan.');
     }
 
     /**
@@ -57,8 +78,18 @@ class MentorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+         // Hapus foto dari storage
+        $mentor = Mentor::findOrFail($id);
+        
+        if ($mentor->photo_path && Storage::disk('public')->exists($mentor->photo_path)) {
+            Storage::disk('public')->delete($mentor->photo_path);
+        }
+
+        $mentor->delete();
+
+        return redirect()->route('admin.mentor.index')->with('success', 'Mentor berhasil dihapus.');
     }
+
 }

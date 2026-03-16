@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Promo;
 use App\Models\Schedule;
+use App\Models\Mentor;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,8 @@ class HomeController extends Controller
         // Ambil data paket dan jadwal yang aktif dari database
         $pricings = \App\Models\Program::where('is_active', true)->get();
         $schedules = \App\Models\Schedule::where('is_active', true)->get();
+         $mentors = Mentor::where('is_active', true)->orderBy('order')->get();
         // 3. Kirim SEMUA data dalam SATU fungsi compact ke view
-        return view('pages.home', compact('programs', 'promos', 'pricings', 'schedules'));
+        return view('pages.home', compact('programs', 'promos', 'pricings', 'schedules', 'mentors'));
     }
 }
