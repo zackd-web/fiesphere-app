@@ -12,8 +12,8 @@
             <div id="mentorTrack" class="flex transition-transform duration-700 cubic-bezier(0.4, 0, 0.2, 1)">
                 
                 @forelse($mentors as $mentor)
-                    <div class="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-3">
-                        <div class="bg-white rounded-[32px] border border-slate-400 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full">
+                    <div class="w-full sm:w-1/2 lg:w-1/4 px-3 shrink-0">
+                        <div class="bg-white rounded-4xl border border-slate-400 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full">
                             <div class="aspect-square relative bg-slate-100 overflow-hidden">
                                 {{-- Badge Keahlian --}}
                                 <div class="absolute top-4 left-4 z-20 bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-full text-[13px] font-black uppercase tracking-tighter shadow-lg">
@@ -31,7 +31,7 @@
 
                                 <div class="mt-4 flex flex-wrap justify-center gap-2">
                                     @foreach($mentor->tags as $tag)
-                                        <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-300">
+                                        <span class="bg-fiesphere-white text-slate-500 text-[15px] font-bold px-2 py-1 rounded-md border border-slate-300 max-w-full truncate">
                                             {{ $tag }}
                                         </span>
                                     @endforeach
@@ -42,7 +42,7 @@
                 @empty
                     {{-- Tampilan kalau admin belum upload promo sama sekali --}}
                     <div class="w-full py-20 text-center border-2 border-dashed border-slate-200 rounded-[40px]">
-                        <p class="text-slate-400 italic">Belum ada mentor yang tersedia saat ini.</p>
+                        <p class="text-slate-400 italic">Belum ada promo atau event aktif saat ini.</p>
                     </div>
                 @endforelse 
             </div>
