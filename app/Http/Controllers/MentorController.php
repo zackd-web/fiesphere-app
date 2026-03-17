@@ -64,15 +64,47 @@ class MentorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mentor = Mentor::findOrFail($id);
+        return view('admin.mentor.edit', compact('mentor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, string $id){
+        $mentor = Mentor::findOrFail($id);
+
+        $data = $request->validate([
+            'name'            => 'required|string|max:255',
+            'specialization'  => 'required|string|max:255',
+            'expertise_badge' => 'required|string|max:255',
+            'photo'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'tags'            => 'nullable|array',
+            'tags.*'          => 'string|max:100',
+            'order'           => 'integer|min:0',
+            'is_active'       => 'nullable',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if($mentor->photo_path) {
+                Storage::disk('public')->delete($mentor->photo_path);
+            }
+
+            $data['photo_path'] = $request->file('photo')->store('mentors', 'public');
+
+        }
+
+        $mentor->update([
+        'name'            => $data['name'],
+        'specialization'  => $data['specialization'],
+        'expertise_badge' => $data['expertise_badge'],
+        'order'           => $data['order'] ?? 0,
+        'tags'            => $data['tags'] ?? [],
+        'is_active'       => $request->boolean('is_active'),
+        'photo_path'      => $data['photo_path'] ?? $mentor->photo_path,
+        ]);
+
+        return redirect()->route('admin.mentor.index')->with('success', 'Mentor berhasil diperbarui.');
     }
 
     /**
