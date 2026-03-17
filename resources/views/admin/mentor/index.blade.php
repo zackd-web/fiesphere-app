@@ -37,7 +37,7 @@
                             >
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-zinc-800 dark:text-white leading-tight">{{ $mentor->name }}</div>
+                            <div class="font-bold text-md text-zinc-800 dark:text-white leading-tight">{{ $mentor->name }}</div>
                             <div class="text-[11px] text-zinc-400 mt-0.5">{{ $mentor->specialization }}</div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                 <flux:table.column>Tags</flux:table.column>
                 <flux:table.column>Urutan</flux:table.column>
                 <flux:table.column>Status</flux:table.column>
-                <flux:table.column>Aksi</flux:table.column>
+                <flux:table.column align="center">Aksi</flux:table.column>
             </flux:table.columns>
 
             <flux:table.rows>
@@ -107,8 +107,8 @@
                                     class="h-10 w-10 shrink-0 rounded-xl object-cover"
                                 >
                                 <div>
-                                    <div class="font-bold text-sm text-zinc-800 dark:text-white leading-tight">{{ $mentor->name }}</div>
-                                    <div class="text-[11px] text-zinc-400 mt-0.5">{{ $mentor->specialization }}</div>
+                                    <div class="font-bold text-md text-zinc-800 dark:text-white leading-tight">{{ $mentor->name }}</div>
+                                    <div class="text-[11px] text-md text-zinc-400 mt-0.5">{{ $mentor->specialization }}</div>
                                 </div>
                             </div>
                         </flux:table.cell>
