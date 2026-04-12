@@ -18,13 +18,16 @@ class SchedulesTable
                 TextColumn::make('time_range')
                     ->searchable(),
                 IconColumn::make('is_active')
+                    ->label('Aktif')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d F Y, H:i')
+                    ->label('Dibuat Pada')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d F Y, H:i')
+                    ->label('Diperbarui Pada')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
