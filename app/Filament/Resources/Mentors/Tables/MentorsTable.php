@@ -16,24 +16,25 @@ class MentorsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('specialization')
+                    ->label('Spesialisasi')
                     ->searchable(),
                 TextColumn::make('expertise_badge')
-                    ->searchable(),
-                TextColumn::make('photo_path')
+                    ->label('Lencana Keahlian')
                     ->searchable(),
                 IconColumn::make('is_active')
+                    ->label('Keaktifan')
                     ->boolean(),
-                TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d F Y, H:i')
+                    ->label('Dibuat Pada')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d F Y, H:i')
+                    ->label('Diperbarui Pada')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

@@ -19,35 +19,40 @@ class ProgramsTable
         return $table
             ->columns([
                 TextColumn::make('title')
+                    ->label('Nama Program')
                     ->searchable(),
                 TextColumn::make('price')
-                    ->money()
+                    ->label('Harga')
+                    ->money('IDR', locale: 'id')
                     ->sortable(),
                 TextColumn::make('duration')
-                    ->searchable(),
-                TextColumn::make('button_text')
-                    ->searchable(),
-                TextColumn::make('button_link')
+                    ->label('Durasi Pertemuan')
                     ->searchable(),
                 IconColumn::make('is_featured')
+                    ->label('Rekomendasi')
                     ->boolean(),
                 IconColumn::make('is_active')
+                    ->label('Aktif')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Dibuat Pada')
+                    ->dateTime('d F Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d F Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label('Dihapus Pada')
+                    ->dateTime('d F Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TrashedFilter::make(),
+                TrashedFilter::make()
+                    ->label('Filter'),
             ])
             ->recordActions([
                 EditAction::make(),
