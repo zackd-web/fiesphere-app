@@ -62,6 +62,7 @@ class RegistrationsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->poll('30s')
             ->filters([
                 //
             ])
