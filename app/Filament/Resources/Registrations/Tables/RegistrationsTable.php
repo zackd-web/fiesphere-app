@@ -116,6 +116,14 @@ class RegistrationsTable
 
                 // 3. Tombol EDIT — Aksi bawaan Filament
                 // EditAction::make(),
+
+                // 3. Tombol HUBUNGI (WhatsApp)
+                Action::make('contact_wa')
+                    ->label('Hubungi')
+                    ->color('success') // Warna hijau
+                    ->icon('heroicon-o-chat-bubble-left-right')
+                    ->url(fn ($record) => "https://wa.me/" . preg_replace('/[^0-9]/', '', $record->whatsapp))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
