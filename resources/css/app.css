@@ -15,41 +15,69 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Font yang lebih elegan & modern */
+    --font-sans: 'Instrument Sans', 'Inter', ui-sans-serif, system-ui;
 
+    /* Brand Identity - Kita perkuat birunya */
     --color-fiesphere-blue: #1e3a8a;
+    --color-fiesphere-blue-light: #3b82f6;
     --color-fiesphere-yellow: #fbbf24;
-    --color-fiesphere-light: #f8fafc;
-    --color-fiesphere-white: #ffffff;
+    
+    /* Override Accent Flux: Pake Brand Color biar konsisten! */
+    --color-accent: var(--color-fiesphere-blue);
+    --color-accent-content: var(--color-white);
 
-    --color-zinc-50: #fafafa;
-    --color-accent: var(--color-neutral-800);
+    /* Bikin UI lebih 'Soft' (Modern Look) */
+    --radius-lg: 0.75rem;
+    --radius-md: 0.5rem;
+    
+    /* Custom Shadows biar dashboard punya dimensi */
+    --shadow-flux: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 @layer theme {
     .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
+        /* Di dark mode, jangan pake biru pekat, pake yang agak terang biar kebaca */
+        --color-accent: var(--color-fiesphere-blue-light);
+        --color-accent-content: var(--color-fiesphere-blue);
+        
+        /* Ganti background zinc yang ngebosenin ke Slate/Midnight yang lebih deep */
+        --color-zinc-900: #0f172a; 
+        --color-zinc-800: #1e293b;
     }
 }
 
 @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
+    :root {
+        /* Variabel khusus Flux untuk kelengkungan komponen */
+        --flux-radius: 0.6rem;
+        --flux-border-width: 1.5px;
     }
+
+    body {
+        @apply antialiased tracking-tight text-zinc-900 dark:text-zinc-100;
+    }
+
+    
 }
 
-[data-flux-field]:not(ui-radio, ui-checkbox) {
-    @apply grid gap-2;
+/* --- Refinement UI Flux --- */
+
+/* Bikin Sidebar & Header lebih 'Pop' */
+[data-flux-sidebar], [data-flux-header] {
+    @apply shadow-sm border-zinc-200/80 dark:border-zinc-800/50;
 }
 
-[data-flux-label] {
-    @apply !mb-0 !leading-tight;
+/* Form Styling: Fokus yang lebih subtle, jangan norak */
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-fiesphere-blue/20 dark:ring-fiesphere-blue-light/30 border-fiesphere-blue;
+}
+
+/* Bikin Sidebar Item lebih ganteng pas aktif */
+[data-flux-sidebar-item][data-current] {
+    @apply bg-fiesphere-blue/5 text-fiesphere-blue dark:bg-fiesphere-blue-light/10 dark:text-fiesphere-blue-light font-semibold;
 }
 
 input:focus[data-flux-control],
