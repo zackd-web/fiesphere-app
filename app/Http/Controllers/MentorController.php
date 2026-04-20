@@ -47,6 +47,7 @@ class MentorController extends Controller
         $validated['is_active']  = $request->boolean('is_active');
         $validated['tags']       = array_filter($request->input('tags', []));
 
+        
         Mentor::create($validated);
 
         return redirect()->route('admin.mentor.index')->with('success', 'Mentor berhasil ditambahkan.');
