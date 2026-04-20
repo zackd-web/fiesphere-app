@@ -26,10 +26,10 @@ class ProgramController extends Controller // Nama class WAJIB sama dengan file
     }
 
     public function destroy($id) {
-    $program = Program::findOrFail($id);
-    $program->delete();
+        $program = Program::findOrFail($id);
+        $program->delete();
 
-    return redirect()->route('admin.program.index')->with('success', 'Program berhasil dihapus permanen!');
+        return redirect()->route('admin.program.index')->with('success', 'Program berhasil dihapus permanen!');
     }
 
     // memproses penyimpanan data

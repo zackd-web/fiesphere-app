@@ -1,5 +1,5 @@
-<x-layouts::app.sidebar :title="$title ?? null">
-    <flux:main>
+<x-layouts.admin> {{-- Sesuai nama file layouts/admin.blade.php --}}
+    <div class="p-6">
         {{ $slot }}
-    </flux:main>
-</x-layouts::app.sidebar>
+    </div>
+</x-layouts.admin>

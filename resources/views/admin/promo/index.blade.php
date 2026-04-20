@@ -1,112 +1,83 @@
-<x-app>
-    {{-- Header --}}
-    <div class="flex flex-col gap-3 mb-6 md:flex-row md:items-center md:justify-between md:mb-8">
-        <div>
-            <flux:heading size="xl" level="1" class="font-bold tracking-tight">Manajemen Promo & Event</flux:heading>
-            <flux:subheading class="mt-1">Daftar poster yang tampil di slider landing page.</flux:subheading>
+<x-layouts.admin title="Promo & Event">
+    {{-- Header Section --}}
+    <div class="mb-10 flex items-end justify-between">
+        <div class="space-y-1">
+            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Manajemen Poster</h3>
+            <p class="text-sm text-slate-500">Atur tampilan slider promo di halaman utama Fiesphere.</p>
         </div>
-        <flux:button href="{{ route('admin.promo.create') }}" variant="primary" icon="plus">
-            Upload Poster
+        <flux:button href="{{ route('admin.promo.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
+            TAMBAH POSTER BARU
         </flux:button>
     </div>
 
-    {{-- Grid Poster --}}
-    @if($promos->isEmpty())
-        <div class="flex flex-col items-center justify-center py-24 text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 mb-4">
-                <flux:icon.photo class="h-8 w-8 text-zinc-300" />
-            </div>
-            <flux:heading class="text-zinc-400 font-semibold">Belum ada poster</flux:heading>
-            <flux:text size="sm" class="text-zinc-400 mt-1 mb-4">Upload poster pertama untuk ditampilkan di slider.</flux:text>
-            <flux:button href="{{ route('admin.promo.create') }}" variant="primary" icon="plus" size="sm">
-                Upload Poster
-            </flux:button>
-        </div>
-    @else
-        
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+    {{-- Grid Promo --}}
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
         @foreach($promos as $item)
-            <flux:card class="p-0 overflow-hidden group border-zinc-700/40 shadow-sm hover:shadow-lg transition-all duration-200 rounded-xl">
-
-                {{-- Thumbnail --}}
-                <div class="relative bg-zinc-900 overflow-hidden" style="aspect-ratio: 16/9;">
-                    <img
-                        src="{{ asset('storage/' . $item->image_path) }}"
-                        alt="{{ $item->title }}"
-                        class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                    >
-                    {{-- Gradient overlay --}}
-                    <div class="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent"></div>
-
-                    {{-- Title di dalam gambar --}}
-                    <div class="absolute bottom-0 left-0 right-0 px-4 py-3">
-                        <p class="text-white text-sm font-bold truncate leading-tight drop-shadow">{{ $item->title }}</p>
-                    </div>
-
-                    {{-- Action buttons overlay saat hover --}}
-                    <div class="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200  bg-zinc-700/40 dark:bg-zinc-300/20">
-                        <flux:tooltip content="Edit poster">
-                            <flux:button
-                                size="sm"
-                                variant="filled"
-                                icon="pencil-square"
-                                class="h-8 w-8 bg-white/90 hover:bg-white text-zinc-700 border-0 shadow-sm"
-                                href="{{ route('admin.promo.edit', $item->id) }}"
-                            />
-                        </flux:tooltip>
-                        <flux:tooltip content="Hapus poster">
-                            <flux:modal.trigger name="delete-promo-{{ $item->id }}">
-                                <flux:button
-                                    size="sm"
-                                    variant="filled"
-                                    icon="trash"
-                                    class="h-8 w-8 bg-red-500/90 hover:bg-red-500 text-white border-0 shadow-sm"
-                                />
-                            </flux:modal.trigger>
-                        </flux:tooltip>
+            <div class="group bg-white/5 border border-white/10 rounded-[40px] overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
+                
+                {{-- Image Area --}}
+                <div class="relative aspect-4/3 overflow-hidden">
+                    <img src="{{ asset('storage/' . $item->image_path) }}" class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-linear-to-t from-[#0f172a] via-transparent to-transparent"></div>
+                    <div class="absolute top-6 right-6">
+                        <span class="rounded-full border border-white/20 bg-blue-600/40 px-4 py-1.5 text-[10px] font-black tracking-widest text-white backdrop-blur-md uppercase shadow-lg">Active</span>
                     </div>
                 </div>
 
-            </flux:card>
+                {{-- Content Area --}}
+                <div class="p-8">
+                    <h4 class="mb-6 text-lg font-black text-white uppercase tracking-tight truncate">{{ $item->title }}</h4>
+
+                    <div class="flex items-center gap-3">
+                        <a href="{{ route('admin.promo.edit', $item->id) }}" 
+                           class="flex-1 rounded-2xl bg-white/5 hover:bg-blue-600 text-white text-center font-bold py-4 text-xs uppercase tracking-widest transition-all">
+                            Edit Data
+                        </a>
+
+                        {{-- TRIGGER MODAL HAPUS --}}
+                        <flux:modal.trigger name="delete-promo-{{ $item->id }}">
+                            <button class="p-4 bg-white/5 text-red-400 hover:bg-red-500 hover:text-white rounded-2xl transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                </svg>
+                            </button>
+                        </flux:modal.trigger>
+                    </div>
+                </div>
+            </div>
         @endforeach
     </div>
 
-    @endif
-
-    {{-- Modals — di luar loop --}}
+    {{-- MODAL SECTION — Berada di luar grid agar tidak merusak layout --}}
     @foreach($promos as $item)
-        <flux:modal name="delete-promo-{{ $item->id }}" class="max-w-sm rounded-2xl">
+        <flux:modal name="delete-promo-{{ $item->id }}" class="max-w-sm bg-[#0f172a] border border-white/10 rounded-[40px] p-8 shadow-2xl">
             <form action="{{ route('admin.promo.destroy', $item->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <div class="p-2 text-center">
-                    {{-- Preview thumbnail kecil --}}
-                    <div class="mx-auto w-32 h-20 rounded-xl overflow-hidden mb-4 border border-zinc-200 dark:border-zinc-700 shadow-sm">
-                        <img
-                            src="{{ asset('storage/' . $item->image_path) }}"
-                            alt="{{ $item->title }}"
-                            class="w-full h-full object-cover"
-                        >
+                
+                <div class="text-center space-y-6">
+                    {{-- Ikon Peringatan --}}
+                    <div class="mx-auto w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-10 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
                     </div>
 
-                    <flux:heading size="lg" class="font-bold">Hapus Poster Ini?</flux:heading>
+                    <div class="space-y-2">
+                        <h4 class="text-xl font-black text-white uppercase tracking-tight">Hapus Poster?</h4>
+                        <p class="text-sm text-slate-400">Poster <span class="text-white font-bold">"{{ $item->title }}"</span> akan dihapus permanen dari sistem.</p>
+                    </div>
 
-                    <flux:text class="mt-2 text-sm text-zinc-500 px-2">
-                        Poster <span class="font-semibold text-zinc-700 dark:text-zinc-200">{{ $item->title }}</span>
-                        akan dihapus permanen dari slider landing page.
-                    </flux:text>
-
-                    <div class="mt-6 flex flex-col gap-2">
-                        <flux:button type="submit" variant="filled" color="red" class="w-full">
-                            Hapus Poster
-                        </flux:button>
+                    <div class="flex flex-col gap-3 pt-4">
+                        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-500/20">
+                            Konfirmasi Hapus
+                        </button>
                         <flux:modal.close>
-                            <flux:button variant="ghost" class="w-full">Batal</flux:button>
+                            <button type="button" class="w-full py-4 text-slate-500 hover:text-white font-bold text-xs uppercase tracking-widest transition-colors">
+                                Batalkan
+                            </button>
                         </flux:modal.close>
                     </div>
                 </div>
             </form>
         </flux:modal>
     @endforeach
-</x-app>
+</x-layouts.admin>

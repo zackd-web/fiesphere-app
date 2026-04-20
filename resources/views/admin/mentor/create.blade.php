@@ -1,214 +1,133 @@
-<x-app>
-    {{-- Header --}}
-    <div class="flex items-center gap-4 mb-8">
-        <flux:button variant="ghost" icon="arrow-left" href="{{ route('admin.mentor.index') }}" size="sm" />
-        <div>
-            <flux:heading size="xl" level="1" class="font-bold tracking-tight">Tambah Mentor</flux:heading>
-            <flux:subheading class="mt-1">Isi data mentor baru yang akan tampil di landing page.</flux:subheading>
-        </div>
-    </div>
-
-    <form action="{{ route('admin.mentor.store') }}" method="POST" enctype="multipart/form-data">
+<x-layouts.admin title="Tambah Mentor">
+    <form action="{{ route('admin.mentor.store') }}" method="POST" enctype="multipart/form-data" class="max-w-6xl mx-auto pb-20">
         @csrf
+        <div class="grid lg:grid-cols-3 gap-8">
+            
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            @if ($errors->any())
+                <div class="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-2xl mb-6">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            {{-- Kolom Kiri: Foto --}}
-            <div class="lg:col-span-1">
-                <flux:card class="p-5 border-zinc-700/40 shadow-sm space-y-4">
-                    <flux:heading size="sm" class="font-semibold">Foto Mentor</flux:heading>
 
-                    {{-- Preview --}}
-                    <div class="relative group">
-                        <div id="photo-preview" class="w-full aspect-square rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-700 transition-colors">
-                            <div id="preview-placeholder" class="flex flex-col items-center gap-2 text-zinc-400">
-                                <flux:icon.camera class="h-10 w-10" />
-                                <span class="text-xs text-center">Klik untuk upload foto</span>
-                            </div>
-                            <img id="preview-img" src="#" alt="Preview" class="hidden w-full h-full object-cover">
+            {{-- Bagian Foto (Kiri) --}}
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white/5 border border-white/10 rounded-sm p-8 text-center shadow-2xl">
+                    <label class="block text-sm font-black text-slate-400 uppercase tracking-widest mb-6">Foto Mentor</label>
+                    <input type="file" name="photo" id="photo-upload" class="hidden" accept="image/*" required>
+                    <label for="photo-upload" class="relative block w-full aspect-square border-2 border-dashed border-white/10 rounded-sm overflow-hidden cursor-pointer hover:bg-white/5 transition-all group">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center space-y-4 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 text-slate-600"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.822 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+                            <p class="text-xs font-black text-slate-500 uppercase">Klik untuk upload foto</p>
                         </div>
-
-                        <input
-                            type="file"
-                            name="photo"
-                            id="photo-input"
-                            accept="image/*"
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            onchange="previewPhoto(this)"
-                        >
+                        <img id="preview" class="hidden absolute inset-0 w-full h-full object-cover">
+                    </label>
+                    <div class="mt-6 space-y-1">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Format: JPG, PNG. Maks 2MB.</p>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Rasio terbaik: 1:1 (square)</p>
                     </div>
-
-                    @error('photo')
-                        <p class="text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-
-                    <flux:text size="xs" class="text-zinc-400 text-center">
-                        Format: JPG, PNG. Maks 2MB.<br>Rasio terbaik: 1:1 (square)
-                    </flux:text>
-                </flux:card>
+                </div>
             </div>
 
-            {{-- Kolom Kanan: Data --}}
-            <div class="lg:col-span-2 space-y-5">
-
-                {{-- Info Dasar --}}
-                <flux:card class="p-5 border-zinc-700/40 shadow-sm space-y-5">
-                    <flux:heading size="sm" class="font-semibold">Informasi Dasar</flux:heading>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="md:col-span-2">
-                            <flux:field>
-                                <flux:label>Nama Lengkap <span class="text-red-500">*</span></flux:label>
-                                <flux:input
-                                    name="name"
-                                    placeholder="contoh: Ananda Zaka"
-                                    value="{{ old('name') }}"
-                                    required
-                                />
-                                @error('name')
-                                    <flux:error>{{ $message }}</flux:error>
-                                @enderror
-                            </flux:field>
+            {{-- Bagian Informasi (Kanan) --}}
+            <div class="lg:col-span-2 space-y-8">
+                {{-- Dasar --}}
+                <div class="bg-white/5 border border-white/10 rounded-sm p-10 space-y-8 shadow-2xl">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Informasi Dasar</h4>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Nama Lengkap<span class="text-red-500 ml-1">*</span></label>
+                            <input type="text" name="name" required placeholder="contoh: Ananda Zaka" value="{{ old('name') }}"
+                                    required class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
                         </div>
-
-                        <div class="md:col-span-2">
-                            <flux:field>
-                                <flux:label>Spesialisasi <span class="text-red-500">*</span></flux:label>
-                                <flux:input
-                                    name="specialization"
-                                    placeholder="contoh: Grammar & Structure Master"
-                                    value="{{ old('specialization') }}"
-                                    required
-                                />
-                                @error('specialization')
-                                    <flux:error>{{ $message }}</flux:error>
-                                @enderror
-                            </flux:field>
-                        </div>
-
-                        <div>
-                            <flux:field>
-                                <flux:label>Badge Keahlian <span class="text-red-500">*</span></flux:label>
-                                <flux:input
-                                    name="expertise_badge"
-                                    placeholder="contoh: IELTS 8.0 EXPERT"
-                                    value="{{ old('expertise_badge') }}"
-                                    required
-                                />
-                                <flux:description>Teks label kuning di pojok foto.</flux:description>
-                                @error('expertise_badge')
-                                    <flux:error>{{ $message }}</flux:error>
-                                @enderror
-                            </flux:field>
-                        </div>
-
-                        <div>
-                            <flux:field>
-                                <flux:label>Urutan Tampil</flux:label>
-                                <flux:input
-                                    type="number"
-                                    name="order"
-                                    placeholder="0"
-                                    value="{{ old('order', 0) }}"
-                                    min="0"
-                                />
-                                <flux:description>Angka kecil tampil lebih dulu.</flux:description>
-                                @error('order')
-                                    <flux:error>{{ $message }}</flux:error>
-                                @enderror
-                            </flux:field>
+                        <div class="space-y-3">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Spesialisasi<span class="text-red-500 ml-1">*</span></label>
+                            <input type="text" name="specialization" required placeholder="contoh: Grammar & Structure Master" value="{{ old('specialization') }}" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
                         </div>
                     </div>
-                </flux:card>
-
-                {{-- Tags --}}
-                <flux:card class="p-5 border-zinc-700/40 shadow-sm space-y-4">
-                    <div>
-                        <flux:heading size="sm" class="font-semibold">Tags Pengalaman</flux:heading>
-                        <flux:text size="xs" class="text-zinc-400 mt-0.5">Contoh: Ex-Tutor Pare, TESOL Certified</flux:text>
-                    </div>
-
-                    <div id="tags-container" class="space-y-2">
-                        @if(old('tags'))
-                            @foreach(old('tags') as $tag)
-                                <div class="flex items-center gap-2 tag-row">
-                                    <flux:input name="tags[]" value="{{ $tag }}" placeholder="contoh: TESOL Certified" class="flex-1" />
-                                    <flux:button type="button" variant="ghost" color="red" icon="x-mark" class="h-9 w-9 shrink-0" onclick="removeTag(this)" />
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="flex items-center gap-2 tag-row">
-                                <flux:input name="tags[]" placeholder="contoh: TESOL Certified" class="flex-1" />
-                                <flux:button type="button" variant="ghost" color="red" icon="x-mark" class="h-9 w-9 shrink-0" onclick="removeTag(this)" />
-                            </div>
-                        @endif
-                    </div>
-
-                    <flux:button type="button" variant="subtle" icon="plus" size="sm" onclick="addTag()">
-                        Tambah Tag
-                    </flux:button>
-
-                    @error('tags')
-                        <p class="text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-                </flux:card>
-
-                {{-- Status --}}
-                <flux:card class="p-5 border-zinc-700/40 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <flux:heading size="sm" class="font-semibold">Status Tampil</flux:heading>
-                            <flux:text size="xs" class="text-zinc-400 mt-0.5">Mentor aktif akan tampil di landing page.</flux:text>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Badge Keahlian<span class="text-red-500 ml-1">*</span></label>
+                            <input type="text" name="expertise_badge" required placeholder="contoh: IELTS 8.0 EXPERT" value="{{ old('expertise_badge') }}" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
+                            <p class="text-[10px] text-slate-500 ml-1">Teks label kuning di pojok foto.</p>
                         </div>
-                        <flux:switch name="is_active" value="1" :checked="old('is_active', true)" />
+                        <div class="space-y-3">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Urutan Tampil</label>
+                            <input type="number" name="order" value="{{ old('order', 0) }}" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all">
+                            <p class="text-[10px] text-slate-500 ml-1">Angka kecil tampil lebih dulu.</p>
+                        </div>
                     </div>
-                </flux:card>
-
-                {{-- Action Buttons --}}
-                <div class="flex items-center justify-end gap-3 pb-6">
-                    <flux:button variant="ghost" href="{{ route('admin.mentor.index') }}">Batal</flux:button>
-                    <flux:button type="submit" variant="primary" icon="check">Simpan Mentor</flux:button>
                 </div>
 
+                {{-- Tags Pengalaman --}}
+                <div class="bg-white/5 border border-white/10 rounded-sm p-10 space-y-6 shadow-2xl">
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Tags Pengalaman</h4>
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Contoh: Ex-Tutor Pare, TESOL Certified</p>
+                        
+                    </div>
+                    <div id="tags-container" class="space-y-4">
+                        <div class="flex items-center gap-3 tag-item">
+                            <input type="text" name="tags[]" placeholder="contoh: TESOL Certified" class="flex-1 bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all">
+                            <button type="button" class="remove-tag p-4 bg-white/5 text-slate-600 hover:text-red-500 rounded-2xl transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-tag" class="flex items-center gap-2 text-xs font-black text-blue-500 uppercase tracking-widest hover:text-blue-400 transition-colors ml-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        Tambah Tag
+                    </button>
+                </div>
+
+                {{-- Status Toggle --}}
+                <div class="bg-white/5 border border-white/10 rounded-sm p-8 flex items-center justify-between shadow-2xl">
+                    <div>
+                        <h4 class="text-sm font-black text-white uppercase tracking-tight">Status Tampil</h4>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-bold">Mentor aktif akan tampil di landing page.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" name="is_active" value="1" checked class="sr-only peer">
+                        <div class="w-14 h-8 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+
+                {{-- Footer Action --}}
+                <div class="flex items-center justify-end gap-6 pt-4">
+                    <a href="{{ route('admin.mentor.index') }}" class="text-xs font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors">Batal</a>
+                    <button type="submit" class="px-10 py-5 bg-white text-blue-900 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-white/5 flex items-center gap-3 hover:bg-blue-50 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-4"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                        Simpan Mentor
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 
     <script>
-        function previewPhoto(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('preview-img').src = e.target.result;
-                document.getElementById('preview-img').classList.remove('hidden');
-                document.getElementById('preview-placeholder').classList.add('hidden');
-            };
-            reader.readAsDataURL(file);
+        // Preview Foto
+        document.getElementById('photo-upload').onchange = evt => {
+            const [file] = document.getElementById('photo-upload').files
+            if (file) {
+                document.getElementById('preview').src = URL.createObjectURL(file)
+                document.getElementById('preview').classList.remove('hidden')
+            }
         }
-
-        function addTag() {
+        // Dynamic Tags
+        document.getElementById('add-tag').onclick = () => {
             const container = document.getElementById('tags-container');
-            const row = document.createElement('div');
-            row.className = 'flex items-center gap-2 tag-row';
-            row.innerHTML = `
-                <input type="text" name="tags[]" placeholder="contoh: TESOL Certified"
-                    class="flex-1 px-3 py-2 text-sm rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <button type="button" onclick="removeTag(this)"
-                    class="h-9 w-9 shrink-0 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            `;
-            container.appendChild(row);
+            const newItem = container.querySelector('.tag-item').cloneNode(true);
+            newItem.querySelector('input').value = '';
+            newItem.querySelector('.remove-tag').onclick = () => { if(container.children.length > 1) newItem.remove() };
+            container.appendChild(newItem);
         }
-
-        function removeTag(btn) {
-            const rows = document.querySelectorAll('.tag-row');
-            if (rows.length <= 1) return; // minimal 1 tag
-            btn.closest('.tag-row').remove();
-        }
+        document.querySelectorAll('.remove-tag').forEach(btn => {
+            btn.onclick = () => { if(document.getElementById('tags-container').children.length > 1) btn.closest('.tag-item').remove() };
+        });
     </script>
-</x-app>
+</x-layouts.admin>
