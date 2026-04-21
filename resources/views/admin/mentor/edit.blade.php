@@ -124,5 +124,27 @@
                 document.getElementById('preview').classList.remove('hidden')
             }
         }
+
+        // Logika Tambah Tag
+        document.getElementById('add-tag').onclick = () => {
+            const container = document.getElementById('tags-container');
+            const newItem = container.querySelector('.tag-item').cloneNode(true);
+            newItem.querySelector('input').value = ''; // Kosongkan input baru
+            container.appendChild(newItem);
+        }
+
+        // Logika Hapus Tag 
+        document.getElementById('tags-container').onclick = (e) => {
+            if (e.target.closest('.remove-tag')) {
+                const container = document.getElementById('tags-container');
+                // Minimal harus ada 1 tag
+                if (container.querySelectorAll('.tag-item').length > 1) {
+                    e.target.closest('.tag-item').remove();
+                } else {
+                    // Kalau tinggal satu, jangan dihapus tapi kosongkan saja
+                    container.querySelector('input').value = '';
+                }
+            }
+        }
     </script>
 </x-layouts.admin>

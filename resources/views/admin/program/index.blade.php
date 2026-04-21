@@ -13,7 +13,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="border-b border-white/5 uppercase text-[10px] font-black tracking-[0.2em] text-slate-500">
+                    <tr class="bg-white/5 border-white/10 text-[17px] font-black text-slate-400 uppercase tracking-[0.2em]">
                         <th class="px-8 py-6">Nama Paket</th>
                         <th class="px-8 py-6">Harga & Durasi</th>
                         <th class="px-8 py-6">Fitur Unggulan</th>
@@ -85,7 +85,7 @@
 
     {{-- Modals Loop --}}
     @foreach($programs as $item)
-        <flux:modal name="delete-program-{{ $item->id }}" class="max-w-sm rounded-[40px] p-10 bg-[#0f172a] border border-white/10">
+        <flux:modal name="delete-program-{{ $item->id }}" class="max-w-sm rounded-md p-10 bg-[#0f172a] border border-white/10">
             <form action="{{ route('admin.program.destroy', $item->id) }}" method="POST">
                 @csrf @method('DELETE')
                 <div class="text-center space-y-6">
@@ -99,8 +99,8 @@
                         <p class="text-slate-400 text-sm leading-relaxed">Paket <span class="text-white font-bold">{{ $item->title }}</span> bakal dihapus permanen. Data siswa yang terdaftar mungkin terpengaruh.</p>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-black uppercase tracking-widest text-xs border-0 transition-all shadow-lg shadow-red-600/20">Hapus Sekarang</button>
-                        <flux:modal.close><button type="button" class="w-full py-4 bg-white/5 text-slate-400 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-all">Batal</button></flux:modal.close>
+                        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-black uppercase tracking-widest text-xs border-0 transition-all shadow-lg shadow-red-600/20">Hapus Sekarang</button>
+                        <flux:modal.close><button type="button" class="w-full py-4 bg-white/5 text-slate-400 rounded-md font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-all">Batal</button></flux:modal.close>
                     </div>
                 </div>
             </form>
