@@ -89,6 +89,8 @@ class MentorController extends Controller
             'is_active'       => 'nullable',
         ]);
 
+        $isActive = $request->boolean('is_active');
+
         if ($request->hasFile('photo_path')) {
             if ($mentor->photo_path && Storage::disk('public')->exists($mentor->photo_path)) {
                 Storage::disk('public')->delete($mentor->photo_path);

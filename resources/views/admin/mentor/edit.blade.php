@@ -50,12 +50,22 @@
                                 <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Contoh: Ex-Tutor Pare, TESOL Certified</p>
                             </div>
                             <div id="tags-container" class="space-y-4">
-                                <div class="flex items-center gap-3 tag-item">
-                                    <input type="text" name="tags[]" value="{{ old('tags.0', $mentor->tags[0] ?? '') }}" placeholder="contoh: TESOL Certified" class="flex-1 bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all">
-                                    <button type="button" class="remove-tag p-4 bg-white/5 text-slate-600 hover:text-red-500 rounded-2xl transition-all">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-                                    </button>
-                                </div>
+                                @foreach(old('tags', $mentor->tags ?? ['']) as $tag)
+                                    <div class="flex items-center gap-4 tag-item">
+                                        <input 
+                                            type="text" 
+                                            name="tags[]" 
+                                            value="{{ $tag }}" 
+                                            placeholder="contoh: TESOL Certified" 
+                                            class="flex-1 bg-white/5 border border-white/10 rounded-2xl py-5 px-8 text-lg text-white focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all"
+                                        >
+                                        <button type="button" class="remove-tag p-5 bg-white/5 text-slate-500 hover:text-red-500 rounded-2xl transition-all">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-7">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                @endforeach
                             </div>
                             <button type="button" id="add-tag" class="flex items-center gap-2 text-xs font-black text-blue-500 uppercase tracking-widest hover:text-blue-400 transition-colors ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
@@ -70,7 +80,7 @@
                                 <p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-bold">Mentor aktif akan tampil di landing page.</p>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" name="is_active" value="1" checked class="sr-only peer">
+                                <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $mentor->is_active)) class="sr-only peer">
                                 <div class="w-14 h-8 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-blue-600"></div>
                             </label>
                         </div>
