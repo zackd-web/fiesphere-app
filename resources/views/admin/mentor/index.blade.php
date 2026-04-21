@@ -28,8 +28,8 @@
                         <tr class="bg-white/5 border-white/10 text-[17px] font-black text-slate-400 uppercase tracking-[0.2em]">
                             <th class="px-8 py-6 ">Mentor</th>
                             <th class="px-6 py-6 text-center ">Badge</th>
-                            <th class="px-6 py-6">Tags & Expertise</th>
-                            <th class="px-6 py-6 text-center">Order</th>
+                            <th class="px-6 py-6">Tags Pengalaman</th>
+                            <th class="px-6 py-6 text-center">Urutan</th>
                             <th class="px-6 py-6 text-center">Status</th>
                             <th class="px-8 py-6 text-right">Aksi</th>
                         </tr>
@@ -40,14 +40,14 @@
                                 {{-- Info Mentor --}}
                                 <td class="px-8 py-5">
                                     <div class="flex items-center gap-4">
-                                        <div class="h-12 w-12 rounded-md overflow-hidden border border-white/10 bg-slate-800 shrink-0">
+                                        <div class="h-16 w-16 rounded-md overflow-hidden border border-white/10 bg-slate-800 shrink-0">
                                             {{-- Field asli adalah photo_path --}}
                                             <img src="{{ asset('storage/' . $mentor->photo_path) }}" class="h-full w-full object-cover">
                                         </div>
                                         <div class="flex flex-col">
-                                            <span class="text-sm font-black text-white uppercase tracking-tight">{{ $mentor->name }}</span>
+                                            <span class="text-[19px] font-black text-white uppercase tracking-tight">{{ $mentor->name }}</span>
                                             {{-- Field asli adalah specialization --}}
-                                            <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{{ $mentor->specialization }}</span>
+                                            <span class="text-[12px] font-bold text-blue-500 uppercase tracking-widest">{{ $mentor->specialization }}</span>
                                         </div>
                                     </div>
                                 </td>
@@ -55,7 +55,7 @@
                                 {{-- Expertise Badge --}}
                                 <td class="px-6 py-5 text-center">
                                     @if($mentor->expertise_badge)
-                                        <span class="bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-tighter shadow-sm">
+                                        <span class="bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-md text-[12px] font-black uppercase tracking-tighter shadow-sm">
                                             {{ $mentor->expertise_badge }}
                                         </span>
                                     @else
@@ -67,7 +67,7 @@
                                 <td class="px-6 py-5">
                                     <div class="flex flex-wrap gap-1.5 max-w-50">
                                         @foreach($mentor->tags ?? [] as $tag)
-                                            <span class="px-2 py-0.5 bg-white/5 border border-white/5 text-[8px] font-bold text-slate-400 rounded-md uppercase tracking-wider">
+                                            <span class="px-2 py-0.5 bg-white/5 border border-white/5 text-[12px] font-bold text-slate-400 rounded-md uppercase tracking-wider">
                                                 {{ $tag }}
                                             </span>
                                         @endforeach
@@ -83,7 +83,7 @@
 
                                 {{-- Status (Boolean) --}}
                                 <td class="px-6 py-5 text-center">
-                                    <span class="h-2 w-2 inline-block rounded-md {{ $mentor->is_active ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]' }}"></span>
+                                    <span class="h-2 w-2 inline-block rounded-md {{ $mentor->is_active ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] ' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]' }}"></span>
                                 </td>
 
                                 {{-- Actions --}}
