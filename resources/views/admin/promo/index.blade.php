@@ -2,8 +2,8 @@
     {{-- Header Section --}}
     <div class="mb-10 flex items-end justify-between">
         <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Manajemen Poster</h3>
-            <p class="text-sm text-slate-500">Atur tampilan slider promo di halaman utama Fiesphere.</p>
+            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Manajemen Poster Fiesphere</h3>
+            <p class="text-md text-slate-500">Atur tampilan slider promo di halaman utama Fiesphere.</p>
         </div>
         <flux:button href="{{ route('admin.promo.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
             TAMBAH POSTER BARU

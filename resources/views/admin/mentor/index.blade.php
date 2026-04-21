@@ -2,8 +2,8 @@
     {{-- Header Section --}}
     <div class="mb-10 flex items-end justify-between">
         <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Daftar Mentor Edusphere</h3>
-            <p class="text-sm text-slate-500">Kelola seluruh profil tenaga pengajar profesional Anda dalam satu tabel terpusat.</p>
+            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Daftar Mentor FieSphere</h3>
+            <p class="text-md text-slate-500">Kelola seluruh profil tenaga pengajar profesional Anda dalam satu tabel terpusat.</p>
         </div>
         <flux:button href="{{ route('admin.mentor.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
             TAMBAH MENTOR BARU

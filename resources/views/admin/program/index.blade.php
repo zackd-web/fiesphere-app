@@ -1,8 +1,8 @@
 <x-layouts.admin title="Manajemen Program & Harga">
     <div class="mb-10 flex items-end justify-between">
         <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Daftar Paket Kursus</h3>
-            <p class="text-sm text-slate-500">Atur paket investasi pendidikan yang tampil di landing page Fiesphere.</p>
+            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Daftar Paket Kursus Fiesphere</h3>
+            <p class="text-md text-slate-500">Atur paket investasi pendidikan yang tampil di landing page Fiesphere.</p>
         </div>
         <flux:button href="{{ route('admin.program.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
             TAMBAH PAKET BARU
