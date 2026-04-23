@@ -2,13 +2,9 @@
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="img-slot h-64 rounded-3xl mt-12 shadow-lg">
-                        <i data-lucide="image" class="w-8 h-8 text-slate-400 absolute"></i>
-                        <!-- <img src="URL_TENTANG_1"> -->
-                    </div>
+                    
                     <div class="img-slot h-64 rounded-3xl shadow-lg">
-                        <i data-lucide="image" class="w-8 h-8 text-slate-400 absolute"></i>
-                        <!-- <img src="URL_TENTANG_2"> -->
+                        <img src="https://img.freepik.com/free-photo/close-up-people-learning-together_23-2149204788.jpg" class="w-full h-full object-cover rounded-3xl">
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -59,10 +55,10 @@
         <!-- Slider Fasilitas -->
         <div class="relative group mb-20">
             <!-- Navigation Buttons -->
-            <button id="prevBtn" class="absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-xl text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:block border border-slate-100">
+            <button id="prevBtn" class="absolute -left-5 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-xl text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:block border border-slate-100">
                 <i data-lucide="chevron-left"></i>
             </button>
-            <button id="nextBtn" class="absolute right-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-xl text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:block border border-slate-100">
+            <button id="nextBtn" class="absolute -right-5 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-xl text-fiesphere-blue hover:bg-fiesphere-blue hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:block border border-slate-100">
                 <i data-lucide="chevron-right"></i>
             </button>
 
