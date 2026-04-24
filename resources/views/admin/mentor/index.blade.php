@@ -2,7 +2,7 @@
     {{-- Header Section --}}
     <div class="mb-10 flex items-end justify-between">
         <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Daftar Mentor FieSphere</h3>
+            <h3 class="text-lg font-bold text-slate-400 tracking-widest">Daftar Mentor FieSphere</h3>
             <p class="text-md text-slate-500">Kelola seluruh profil tenaga pengajar profesional Anda dalam satu tabel terpusat.</p>
         </div>
         <flux:button href="{{ route('admin.mentor.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
@@ -16,7 +16,7 @@
             <div class="h-20 w-20 bg-white/5 rounded-md flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 text-slate-600"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 <PASSWORD>">
             </div>
-            <h4 class="text-white font-black uppercase tracking-tight">Belum Ada Mentor</h4>
+            <h4 class="text-white font-black tracking-tight">Belum Ada Mentor</h4>
             <p class="text-slate-500 text-sm mt-2">Daftar pengajar Anda akan muncul di sini setelah Anda menambahkannya.</p>
         </div>
     @else
@@ -25,7 +25,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-white/5 border-white/10 text-[17px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                        <tr class="bg-white/5 border-white/10 text-[17px] font-black text-slate-400 tracking-[0.2em]">
                             <th class="px-8 py-6 ">Mentor</th>
                             <th class="px-6 py-6 text-center ">Badge</th>
                             <th class="px-6 py-6">Tags Pengalaman</th>
@@ -45,9 +45,9 @@
                                             <img src="{{ asset('storage/' . $mentor->photo_path) }}" class="h-full w-full object-cover">
                                         </div>
                                         <div class="flex flex-col">
-                                            <span class="text-[19px] font-black text-white uppercase tracking-tight">{{ $mentor->name }}</span>
+                                            <span class="text-[19px] font-black text-white tracking-tight">{{ $mentor->name }}</span>
                                             {{-- Field asli adalah specialization --}}
-                                            <span class="text-[12px] font-bold text-blue-500 uppercase tracking-widest">{{ $mentor->specialization }}</span>
+                                            <span class="text-[12px] font-bold text-blue-500 tracking-widest">{{ $mentor->specialization }}</span>
                                         </div>
                                     </div>
                                 </td>
@@ -55,7 +55,7 @@
                                 {{-- Expertise Badge --}}
                                 <td class="px-6 py-5 text-center">
                                     @if($mentor->expertise_badge)
-                                        <span class="bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-md text-[12px] font-black uppercase tracking-tighter shadow-sm">
+                                        <span class="bg-fiesphere-yellow text-fiesphere-blue px-3 py-1 rounded-md text-[12px] font-black tracking-tighter shadow-sm">
                                             {{ $mentor->expertise_badge }}
                                         </span>
                                     @else
@@ -67,7 +67,7 @@
                                 <td class="px-6 py-5">
                                     <div class="flex flex-wrap gap-1.5 max-w-50">
                                         @foreach($mentor->tags ?? [] as $tag)
-                                            <span class="px-2 py-0.5 bg-white/5 border border-white/5 text-[12px] font-bold text-slate-400 rounded-md uppercase tracking-wider">
+                                            <span class="px-2 py-0.5 bg-white/5 border border-white/5 text-[12px] font-bold text-slate-400 rounded-md tracking-wider">
                                                 {{ $tag }}
                                             </span>
                                         @endforeach
@@ -113,16 +113,16 @@
                                                 </div>
 
                                                 <div class="space-y-2">
-                                                    <h4 class="text-xl font-black text-white uppercase tracking-tight">Hapus Mentor?</h4>
+                                                    <h4 class="text-xl font-black text-white tracking-tight">Hapus Mentor?</h4>
                                                     <p class="text-sm text-slate-400 leading-relaxed">Data mentor <span class="text-white font-bold">"{{ $mentor->name }}"</span> akan dihapus permanen beserta fotonya dari sistem.</p>
                                                 </div>
 
                                                 <div class="flex flex-col gap-3 pt-4">
-                                                    <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-500/20">
+                                                    <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-black text-xs tracking-widest transition-all shadow-xl shadow-red-500/20">
                                                         Ya, Hapus Sekarang
                                                     </button>
                                                     <flux:modal.close>
-                                                        <button type="button" class="w-full py-4 text-slate-500 hover:text-white font-bold text-xs uppercase tracking-widest transition-colors">
+                                                        <button type="button" class="w-full py-4 text-slate-500 hover:text-white font-bold text-xs tracking-widest transition-colors">
                                                             Batalkan
                                                         </button>
                                                     </flux:modal.close>

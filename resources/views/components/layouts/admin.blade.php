@@ -22,8 +22,7 @@
         
         <div class="p-8 mb-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/30 text-xl">E</div>
-                <h1 class="text-2xl font-black text-white tracking-tighter uppercase font-sans">EDU<span class="text-blue-500">SPHERE</span></h1>
+                <h1 class="text-2xl font-black text-white tracking-tighter font-sans">Fie<span class="text-blue-500">Sphere</span></h1>
             </div>
         </div>
 
@@ -71,15 +70,27 @@
         </nav>
 
         <div class="p-6">
-            <div class="bg-white/5 border border-white/10 rounded-[28px] p-4 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white font-black text-sm">
-                    {{ auth()->user()->initials() }}
+            <div class="bg-white/5 border border-white/10 rounded-[28px] p-4 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4 overflow-hidden">
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-sm font-black text-white uppercase tracking-tight truncate">{{ auth()->user()->name }}</span>
+                        <span class="text-[10px] text-white-500 font-bold uppercase tracking-widest">Admin</span>
+                    </div>
                 </div>
-                <div class="flex flex-col overflow-hidden">
-                    <span class="text-sm font-black text-white uppercase tracking-tight truncate">{{ auth()->user()->name }}</span>
-                </div>
+
+                {{-- Tombol Logout --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                        </svg>
+                    </button>
+                </form>
             </div>
         </div>
+
+
     </aside>
 
     <main class="flex-1 p-10 bg-[#0f172a] h-screen overflow-y-auto">

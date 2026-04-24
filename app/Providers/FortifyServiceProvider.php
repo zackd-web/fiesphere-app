@@ -29,6 +29,16 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
+
+        // Kasih tau Fortify buat pake view login custom lu
+        Fortify::loginView(function () {
+            return view('livewire.auth.login'); 
+        });
+
+        // Kalau lu punya halaman register custom juga (di views/livewire/auth/register.blade.php)
+        Fortify::registerView(function () {
+            return view('livewire.auth.register');
+        });
     }
 
     /**
@@ -69,4 +79,6 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($throttleKey);
         });
     }
+
+    
 }

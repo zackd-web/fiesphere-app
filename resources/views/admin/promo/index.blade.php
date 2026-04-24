@@ -2,7 +2,7 @@
     {{-- Header Section --}}
     <div class="mb-10 flex items-end justify-between">
         <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-400 uppercase tracking-widest">Manajemen Poster Fiesphere</h3>
+            <h3 class="text-lg font-bold text-slate-400  tracking-widest">Manajemen Poster Fiesphere</h3>
             <p class="text-md text-slate-500">Atur tampilan slider promo di halaman utama Fiesphere.</p>
         </div>
         <flux:button href="{{ route('admin.promo.create') }}" variant="primary" icon="plus" class="rounded-md shadow-xl shadow-blue-500/20 font-black py-6">
@@ -20,17 +20,17 @@
                     <img src="{{ asset('storage/' . $item->image_path) }}" class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-linear-to-t from-[#0f172a] via-transparent to-transparent"></div>
                     <div class="absolute top-6 right-6">
-                        <span class="rounded-md border border-white/20 bg-blue-600/40 px-4 py-1.5 text-[10px] font-black tracking-widest text-white backdrop-blur-md uppercase shadow-lg">Active</span>
+                        <span class="rounded-md border border-white/20 bg-blue-600/40 px-4 py-1.5 text-[10px] font-black tracking-widest text-white backdrop-blur-md  shadow-lg">Active</span>
                     </div>
                 </div>
 
                 {{-- Content Area --}}
                 <div class="p-8">
-                    <h4 class="mb-6 text-lg font-black text-white uppercase tracking-tight truncate">{{ $item->title }}</h4>
+                    <h4 class="mb-6 text-lg font-black text-white  tracking-tight truncate">{{ $item->title }}</h4>
 
                     <div class="flex items-center gap-3">
                         <a href="{{ route('admin.promo.edit', $item->id) }}" 
-                           class="flex-1 rounded-md bg-white/5 hover:bg-blue-600 text-white text-center font-bold py-4 text-xs uppercase tracking-widest transition-all">
+                           class="flex-1 rounded-md bg-white/5 hover:bg-blue-600 text-white text-center font-bold py-4 text-xs  tracking-widest transition-all">
                             Edit Data
                         </a>
 
@@ -62,16 +62,16 @@
                     </div>
 
                     <div class="space-y-2">
-                        <h4 class="text-xl font-black text-white uppercase tracking-tight">Hapus Poster?</h4>
+                        <h4 class="text-xl font-black text-white  tracking-tight">Hapus Poster?</h4>
                         <p class="text-sm text-slate-400">Poster <span class="text-white font-bold">"{{ $item->title }}"</span> akan dihapus permanen dari sistem.</p>
                     </div>
 
                     <div class="flex flex-col gap-3 pt-4">
-                        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-500/20">
+                        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-black text-xs  tracking-widest transition-all shadow-xl shadow-red-500/20">
                             Konfirmasi Hapus
                         </button>
                         <flux:modal.close>
-                            <button type="button" class="w-full py-4 text-slate-500 hover:text-white font-bold text-xs uppercase tracking-widest transition-colors">
+                            <button type="button" class="w-full py-4 text-slate-500 hover:text-white font-bold text-xs  tracking-widest transition-colors">
                                 Batalkan
                             </button>
                         </flux:modal.close>

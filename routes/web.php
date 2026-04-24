@@ -7,6 +7,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::post('/submit-pendaftaran', [RegisterController::class, 'store'])->name('
 Route::middleware(['auth', 'verified'])->group(function () {
     
     // Dashboard Utama
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Kelompok rute Admin (Semua rute di sini akan otomatis berawalan 'admin.')
     Route::prefix('admin')->name('admin.')->group(function () {
